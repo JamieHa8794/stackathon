@@ -55,7 +55,7 @@ const mapSignup = state => {
   }
 }
 
-const mapDispatch = dispatch => {
+const mapDispatch = (dispatch, {history}) => {
   return {
     handleSubmit(evt) {
       evt.preventDefault()
@@ -63,6 +63,12 @@ const mapDispatch = dispatch => {
       const username = evt.target.username.value
       const password = evt.target.password.value
       dispatch(authenticate(username, password, formName))
+      if(evt.target.name === 'signup'){
+        history.push('/trainer/addTrainerInfo');
+      }
+      else{
+        history.push('/home');
+      }
     }
   }
 }

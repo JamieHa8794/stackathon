@@ -4,6 +4,11 @@ body {
 
 a {
   text-decoration: none;
+  color: black;
+}
+
+a:hover {
+  color: mediumaquamarine;
 }
 
 label {
@@ -19,3 +24,65 @@ form div {
   margin: 1em;
   display: inline-block;
 }
+
+.back{
+  text-decoration: underline;
+  color: black;
+}
+
+.pokemonUl{
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.pokemonLi{
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.pokemonLi a{
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.singlePokemon {
+  display:flex;
+  flex-wrap: wrap;
+}
+
+.singlePokemon img{
+  border-radius: 60%;
+  opacity: .75;
+  height: 300px;
+  width: 300px;
+}
+
+.trainerDetails{
+  display:flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding-top: 20px;
+}
+
+
+.trainerDetails img{
+  /* border-radius: 20%; */
+  opacity: .75;
+  height: 400px;
+  width: 250px;
+  padding-right: 100px;
+}
+
+.trainerDetails form label{
+  padding: 10px;
+  padding-left: 0px;
+}
+

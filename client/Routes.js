@@ -4,6 +4,10 @@ import {withRouter, Route, Switch, Redirect} from 'react-router-dom'
 import { Login, Signup } from './components/AuthForm';
 import Home from './components/Home';
 import {me} from './store'
+import Pokemon from './components/Pokemon'
+import SinglePokemon from './components/SinglePokemon'
+import AddTrainerInfo from './components/AddTrainerInfo'
+import {_loadPokemon, loadPokemon} from './store/pokemonReducers'
 
 /**
  * COMPONENT
@@ -11,17 +15,20 @@ import {me} from './store'
 class Routes extends Component {
   componentDidMount() {
     this.props.loadInitialData()
+    this.props._loadPokemon();
   }
 
   render() {
     const {isLoggedIn} = this.props
-
     return (
       <div>
+        <Route exact path='/pokemon' component={Pokemon}/>
+        <Route exact path='/pokemon/:id' component={SinglePokemon}/>
+        <Route exact path='/trainer/addTrainerInfo' component={AddTrainerInfo}/>
         {isLoggedIn ? (
           <Switch>
             <Route path="/home" component={Home} />
-            <Redirect to="/home" />
+            {/* <Redirect to="/home" /> */}
           </Switch>
         ) : (
           <Switch>
@@ -50,6 +57,9 @@ const mapDispatch = dispatch => {
   return {
     loadInitialData() {
       dispatch(me())
+    },
+    _loadPokemon: async () =>{
+      dispatch(loadPokemon())
     }
   }
 }

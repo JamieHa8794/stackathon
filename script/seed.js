@@ -1,6 +1,9 @@
 'use strict'
 
-const {db, models: {User} } = require('../server/db')
+const {db, models: {User, Pokemon, Trainers, Types, Bags} } = require('../server/db')
+const pokemonData = require('../server/db/models/pokemonData')
+const pokemonList = [...pokemonData.list()]
+const pokemonTypes = [...pokemonData.typeList()]
 
 /**
  * seed - this function clears the database, updates tables to
@@ -15,6 +18,44 @@ async function seed() {
     User.create({ username: 'cody', password: '123' }),
     User.create({ username: 'murphy', password: '123' }),
   ])
+
+
+  const typesArr = await Promise.all(
+    pokemonTypes.map(type =>{
+      return(
+        Types.create({
+          type: `${type}`
+        })
+      )
+    })
+  )
+
+  const pokemon = await Promise.all(
+    pokemonList.map(_pokemon =>{
+      return(
+        Pokemon.create({
+            number: _pokemon.number,
+            name: _pokemon.name,
+            typeId: (typesArr.find(type => type.type === _pokemon.type).id),
+            hp: _pokemon.hp,
+            attack: _pokemon.attack,
+            defense: _pokemon.defense,
+            speed: _pokemon.speed, 
+            description: _pokemon.description
+        })
+      )
+    })
+  )
+
+  const [Jamie] = await Promise.all([
+    Trainers.create({firstName: 'Jamie', lastName: 'Ha', imgUrl: ''})
+  ])
+
+  const bag = await Promise.all([
+    Bags.create({trainerId: Jamie.id})
+  ])
+
+
 
   console.log(`seeded ${users.length} users`)
   console.log(`seeded successfully`)
