@@ -10,3 +10,33 @@ router.get('/', async(req, res, next) =>{
         next(err)
     }
 })
+
+
+router.post('/', async (req, res, next)=>{
+    try{
+        res.status(201).send(await Trainers.create({
+            userId: req.body.id,
+            firstName: req.body.firstName,
+            lastName: req.body.lastName,
+            imgUrl: req.body.imgUrl,
+            bagId: req.body.id,
+        }))
+    }
+    catch (error){
+        next(error)
+    }
+})
+
+router.put('/:id', async (req, res, next)=>{
+    try{
+        const trainer = await Trainers.findByPk(req.params.id)
+        res.send(await trainer.update({
+            firstName: req.body.firstName,
+            lastName: req.body.lastName,
+            imgUrl: req.body.imgUrl,
+        }))
+    }
+    catch (error){
+        next(error)
+    }
+})

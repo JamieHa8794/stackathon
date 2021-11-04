@@ -86,3 +86,39 @@ form div {
   padding-left: 0px;
 }
 
+.myBagPokemonUl{
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.myBagPokemonLi{
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.myBagPokemonLi a{
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.battle{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.battleMyPokemon{
+  padding: 20px;
+}
+
+.battleOpponentPokemon{
+  padding: 20px;
+}

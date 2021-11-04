@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux'
-
+import {createTrainerProfile} from '../store/trainerReducers'
+import {createBag} from '../store/bagReducers';
 
 const trainerImgs = [
     {
@@ -33,7 +34,7 @@ const trainerImgs = [
 class AddTrainerInfo extends Component{
     constructor(props){
         super(props);
-        const {trainer} = this.props;
+        const {trainer, auth} = this.props;
         // this.state = {
         //     id: trainer.id ? trainer.id : '',
         //     firstName: trainer.firstName ? trainer.firstName : '',
@@ -41,21 +42,23 @@ class AddTrainerInfo extends Component{
         //     imgUrl: trainer.imgUrl ? trainer.imgUrl : '',
         // }
         this.state = {
-            id: '',
+            id: auth ? auth.id : '',
             firstName: '',
             lastName: '',
             imgUrl: '',
         }
         this.onChange = this.onChange.bind(this)
+        this.onSubmit = this.onSubmit.bind(this)
     }
     onChange(event){
         const change = {};
         change[event.target.name] = event.target.value;
-        console.log(change);
+        change.id = this.props.auth.id;
         this.setState(change);
     }
     onSubmit(event){
-        const {firstName, lastName, imgUrl} = this.state;
+        const {id, firstName, lastName, imgUrl} = this.state;
+        console.log(id)
         event.preventDefault();
         if(firstName === ''){
             window.alert('First Name is requried');
@@ -66,14 +69,20 @@ class AddTrainerInfo extends Component{
         else if(imgUrl === ''){
             window.alert('Please Choose an Avatar')
         }
+        else{
+            this.props.createBag()
+            setTimeout(() => {
+                this.props.createTrainerProfile(id, firstName, lastName, imgUrl)
+            }, 50);
+        }
     }
     render(){
         const {firstName, lastName, imgUrl} = this.state;
-        const {onChange} = this
+        const {onChange, onSubmit} = this
         return(
             <div className='trainerDetails'>
                 <img src={imgUrl ? imgUrl : 'https://tribbyfam.github.io/pokemon-gym/css/images/logo.png'}/>
-                <form>
+                <form name="updateTrainerInfo" onSubmit={onSubmit}>
                     <label>First Name</label>
                     <input value={firstName} name='firstName' onChange={onChange}/>
                     <label>Last Name</label>
@@ -98,8 +107,21 @@ class AddTrainerInfo extends Component{
     }
 }
 
+
 const mapStateToProps = (state) => {
     return state;
 }
 
-export default connect(mapStateToProps)(AddTrainerInfo)
+const mapDispatchToProps = (dispatch, {history}) =>{
+    return {
+        createBag : () =>{
+            dispatch(createBag())
+        },
+        createTrainerProfile : (id, firstName, lastName, imgUrl) =>{
+            dispatch(createTrainerProfile(id, firstName, lastName, imgUrl, history))
+        }
+    }
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(AddTrainerInfo)

@@ -9,7 +9,7 @@ const Trainers = db.define('trainer', {
     lastName:{
         type: STRING
     },
-    imgURL:{
+    imgUrl:{
         type: STRING(10000)
     },
 })

@@ -15,8 +15,6 @@ async function seed() {
 
   // Creating Users
   const users = await Promise.all([
-    User.create({ username: 'cody', password: '123' }),
-    User.create({ username: 'murphy', password: '123' }),
   ])
 
 
@@ -30,10 +28,12 @@ async function seed() {
     })
   )
 
+
   const pokemon = await Promise.all(
     pokemonList.map(_pokemon =>{
       return(
         Pokemon.create({
+            id: _pokemon.number,
             number: _pokemon.number,
             name: _pokemon.name,
             typeId: (typesArr.find(type => type.type === _pokemon.type).id),
@@ -48,11 +48,11 @@ async function seed() {
   )
 
   const [Jamie] = await Promise.all([
-    Trainers.create({firstName: 'Jamie', lastName: 'Ha', imgUrl: ''})
+    //Trainers.create({firstName: 'Jamie', lastName: 'Ha', imgUrl: ''})
   ])
 
   const bag = await Promise.all([
-    Bags.create({trainerId: Jamie.id})
+    Bags.create({id: -1000})
   ])
 
 

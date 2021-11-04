@@ -10,3 +10,14 @@ router.get('/', async(req, res, next) =>{
         next(err)
     }
 })
+
+router.post('/', async(req, res, next) =>{
+    try{
+        const bags = await Bags.findAll()
+        res.status(201).send(await Bags.create({
+        }))
+    }
+    catch(err){
+        next(err)
+    }
+})

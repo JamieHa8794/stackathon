@@ -1,56 +1,83 @@
+import { render } from 'enzyme';
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom'
+import {updatePokemon} from '../store/pokemonReducers'
 
-const SinglePokemon = ({pokemon, match:{params: {id}}, history }) => {
-    if(pokemon.length === 0){
-        return(<div>No Pokemon found here :(</div>)
+
+class SinglePokemon extends Component{
+    constructor(props){
+        super(props)
+        this.onClick = this.onClick.bind(this)
     }
-    const _pokemon = pokemon.find(_pokemon => _pokemon.id === id*1)
-    if(_pokemon === undefined){
-        return(<div>No Pokemon found here :(</div>)
+    onClick(){
+        const {pokemon, updatePokemon, auth, match: {params: {id} }, history} = this.props;
+        updatePokemon(id, auth.id);
     }
-    return(
-        <div>
-            <Link className='back' to="/pokemon">Back to All Pokemon</Link>
-            <div className='singlePokemon'>
-                <img src={`../images/${_pokemon.name}.png`}/>
-                <div className='pokemonDetails'>
-                    <div>
-                        {_pokemon.name}
-                    </div>
-                    <button>Pick Pokemon</button>
-                    <div>
-                        No. {_pokemon.number}
-                    </div>
-                    <div>
-                        Type: {_pokemon.type}
-                    </div>
-                    <div>
-                        {_pokemon.description}
-                    </div>
-                    <div className='stats'> 
+    render(){
+        const {pokemon, match: {params: {id} }} = this.props;
+        const {onClick} = this
+
+        if(pokemon.length === 0){
+            return(<div>No Pokemon found here :(</div>)
+        }
+        const _pokemon = pokemon.find(_pokemon => _pokemon.number === id*1)
+        if(_pokemon === undefined){
+            return(<div>No Pokemon found here :(</div>)
+        }
+
+        return(
+            <div>
+                <Link className='back' to="/pokemon">Back to All Pokemon</Link>
+                <div className='singlePokemon'>
+                    <img src={`../images/${_pokemon.name}.png`}/>
+                    <div className='pokemonDetails'>
                         <div>
-                            HP: {_pokemon.hp}
+                            {_pokemon.name}
+                        </div>
+                        <button onClick={onClick}>Pick Pokemon</button>
+                        <div>
+                            No. {_pokemon.number}
                         </div>
                         <div>
-                            Attack: {_pokemon.attack}
+                            Type: {_pokemon.type}
                         </div>
                         <div>
-                            Defense: {_pokemon.defense}
+                            {_pokemon.description}
                         </div>
-                        <div>
-                            Speed: {_pokemon.speed}
+                        <div className='stats'> 
+                            <div>
+                                HP: {_pokemon.hp}
+                            </div>
+                            <div>
+                                Attack: {_pokemon.attack}
+                            </div>
+                            <div>
+                                Defense: {_pokemon.defense}
+                            </div>
+                            <div>
+                                Speed: {_pokemon.speed}
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    )
+        )
+    }
+
+}
+
+const mapDispatchToProps = (dispatch, {history}) =>{
+    return{
+        updatePokemon: (pokemonId, bagId) =>{
+            dispatch(updatePokemon(pokemonId, bagId, history))
+        }
+    }
 }
 
 const mapStateToProps = (state) => {
     return state;
 }
 
-export default connect(mapStateToProps)(SinglePokemon)
+
+export default connect(mapStateToProps, mapDispatchToProps)(SinglePokemon)

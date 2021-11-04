@@ -10,3 +10,16 @@ router.get('/', async(req, res, next) =>{
         next(err)
     }
 })
+
+
+router.put('/:id', async (req, res, next)=>{
+    try{
+        const pokemon = await Pokemon.findByPk(req.params.id)
+        res.send(await pokemon.update({
+            bagId: req.body.bagId
+        }))
+    }
+    catch (error){
+        next(error)
+    }
+})

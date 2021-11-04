@@ -7,6 +7,8 @@ import {me} from './store'
 import Pokemon from './components/Pokemon'
 import SinglePokemon from './components/SinglePokemon'
 import AddTrainerInfo from './components/AddTrainerInfo'
+import MyBag from './components/MyBag'
+import Battle from './components/Battle'
 import {_loadPokemon, loadPokemon} from './store/pokemonReducers'
 
 /**
@@ -25,6 +27,8 @@ class Routes extends Component {
         <Route exact path='/pokemon' component={Pokemon}/>
         <Route exact path='/pokemon/:id' component={SinglePokemon}/>
         <Route exact path='/trainer/addTrainerInfo' component={AddTrainerInfo}/>
+        <Route exact path='/trainer/myBag' component={MyBag}/>
+        <Route exact path='/Battle' component={Battle}/>
         {isLoggedIn ? (
           <Switch>
             <Route path="/home" component={Home} />
