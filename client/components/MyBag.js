@@ -81,9 +81,9 @@ class MyBag extends Component{
                         You can only have 3 pokemon in your bag! Remove some to get started!
                     </div>
                     <ul className='myBagPokemonUl'>
-                        {myPokemon.map(_pokemon =>{
+                        {myPokemon.map((_pokemon, idx) =>{
                             return(
-                                <li className='myBagPokemonLi' key={_pokemon.id}>
+                                <li className='myBagPokemonLi' key={idx}>
                                     <Link to={`/pokemon/${_pokemon.number}`}>
                                     <img src={`../images/${_pokemon.name}.png`}/>
                                     <div>

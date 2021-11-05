@@ -8,7 +8,7 @@ class YouLost extends Component{
     }
     render(){
         return(
-            <div>
+            <div className='results'>
                 <div>
                     Oh no! You lost... 
                 </div>

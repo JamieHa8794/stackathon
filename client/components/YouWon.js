@@ -9,7 +9,7 @@ class YouWon extends Component{
     }
     render(){
         return(
-            <div>
+            <div className='results'>
                 <div>
                     You did it!
                 </div>

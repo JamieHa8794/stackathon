@@ -35,7 +35,7 @@ const createTrainerProfile = (id, firstName, lastName, imgUrl, history) =>{
     return async (dispatch) =>{
         const trainer = (await axios.post(`/api/trainers`, {id, firstName, lastName, imgUrl})).data;
         dispatch(_createTrainerProfile(trainer))
-        history.push('/pokemon');
+        // history.push('/pokemon');
     }
 }
 

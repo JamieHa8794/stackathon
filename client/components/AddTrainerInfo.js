@@ -57,6 +57,7 @@ class AddTrainerInfo extends Component{
     }
     onSubmit(event){
         const {id, firstName, lastName, imgUrl} = this.state;
+        const {history} = this.props
         console.log(id)
         event.preventDefault();
         if(firstName === ''){
@@ -70,6 +71,7 @@ class AddTrainerInfo extends Component{
         }
         else{
             this.props.createTrainerProfile(id, firstName, lastName, imgUrl)
+            history.push('/HowToPlay')
         }
     }
     render(){
