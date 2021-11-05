@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux'
 import {createTrainerProfile} from '../store/trainerReducers'
-import {createBag} from '../store/bagReducers';
 
 const trainerImgs = [
     {
@@ -70,10 +69,7 @@ class AddTrainerInfo extends Component{
             window.alert('Please Choose an Avatar')
         }
         else{
-            this.props.createBag()
-            setTimeout(() => {
-                this.props.createTrainerProfile(id, firstName, lastName, imgUrl)
-            }, 50);
+            this.props.createTrainerProfile(id, firstName, lastName, imgUrl)
         }
     }
     render(){

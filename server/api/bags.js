@@ -13,11 +13,23 @@ router.get('/', async(req, res, next) =>{
 
 router.post('/', async(req, res, next) =>{
     try{
-        const bags = await Bags.findAll()
         res.status(201).send(await Bags.create({
+            trainerId: req.body.trainerId,
+            pokemonId: req.body.pokemonId
         }))
     }
     catch(err){
         next(err)
     }
 })
+
+router.delete('/:id', async (req, res, next) =>{
+    try{
+      const bag = await Bags.findByPk(req.params.id)
+      await bag.destroy();
+      res.sendStatus(204);
+    }
+    catch(err){
+      next(err)
+    } 
+  })

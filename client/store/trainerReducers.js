@@ -62,4 +62,4 @@ const _updateTrainerInfo = (trainer) =>{
 }
 
 export default trainerReducers;
-export {loadTrainers, createTrainerProfile, updateTrainerInfo}
+export {_loadTrainers, loadTrainers, createTrainerProfile, updateTrainerInfo}

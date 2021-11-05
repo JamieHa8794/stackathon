@@ -48,11 +48,10 @@ async function seed() {
   )
 
   const [Jamie] = await Promise.all([
-    //Trainers.create({firstName: 'Jamie', lastName: 'Ha', imgUrl: ''})
+    Trainers.create({id: -1000})
   ])
 
   const bag = await Promise.all([
-    Bags.create({id: -1000})
   ])
 
 

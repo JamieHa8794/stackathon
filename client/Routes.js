@@ -10,6 +10,9 @@ import AddTrainerInfo from './components/AddTrainerInfo'
 import MyBag from './components/MyBag'
 import Battle from './components/Battle'
 import {_loadPokemon, loadPokemon} from './store/pokemonReducers'
+import {_loadBags, loadBags} from './store/bagReducers'
+import {_loadTrainers, loadTrainers} from './store/trainerReducers'
+
 
 /**
  * COMPONENT
@@ -18,6 +21,8 @@ class Routes extends Component {
   componentDidMount() {
     this.props.loadInitialData()
     this.props._loadPokemon();
+    this.props._loadBags();
+    this.props._loadTrainers();
   }
 
   render() {
@@ -64,6 +69,12 @@ const mapDispatch = dispatch => {
     },
     _loadPokemon: async () =>{
       dispatch(loadPokemon())
+    },
+    _loadBags: async () =>{
+      dispatch(loadBags())
+    },
+    _loadTrainers: async () =>{
+      dispatch(loadTrainers())
     }
   }
 }

@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom'
-import {updatePokemon} from '../store/pokemonReducers'
-
+import {removeFromBag} from '../store/bagReducers'
+import {addToBag} from '../store/bagReducers'
 
 class MyBag extends Component{
     constructor(props){
@@ -14,29 +14,35 @@ class MyBag extends Component{
         this.startBattle = this.startBattle.bind(this);
     }
     removePokemon(pokemonNumber){
-        const {pokemon, updatePokemon} = this.props;
-        console.log(pokemonNumber)
-        updatePokemon(pokemonNumber, null);
+        const {bags, removeFromBag, pokemon, auth, match: {params: {id} }, history} = this.props;
+        const myBagArr = bags.filter(bag => bag.trainerId === auth.id)
+        const _bagItem = myBagArr.find(_bag => _bag.pokemonId === pokemonNumber)
+        removeFromBag(_bagItem.id);
     }
     startBattle(){
-        const {pokemon, updatePokemon} = this.props;
-        // while(pokemon.filter(_pokemon => _pokemon.bagId === -1000).length < 3){
-        //     let pokemonNumber = Math.round(Math.random()*pokemon.length)
-        //     updatePokemon(pokemonNumber, -1000);
-        // }
-        if(pokemon.filter(_pokemon => _pokemon.bagId === -1000).length < 3){
-            for(let i = 0; i<3; i++){
-                let pokemonNumber = Math.round(Math.random()*pokemon.length)
-                updatePokemon(pokemonNumber, -1000);
+        const {bags, addToBag, pokemon, auth, match: {params: {id} }, history} = this.props;
+        let myBagArr = bags.filter(bag => bag.trainerId === -1000)
+        console.log(myBagArr)
+        if(myBagArr.length < 3){
+            for(let i = 0; i<(3-myBagArr.length); i++){
+                console.log(Math.round(Math.random()*pokemon.length))
+                addToBag(-1000, Math.round(Math.random()*pokemon.length))
             }
         }
-        console.log(pokemon.filter(_pokemon => _pokemon.bagId === -1000))
+        if(myBagArr.length === 3){
+            history.push('/Battle');
+        }
     }
     render(){
-        const {pokemon, auth, match: {params: {id} }, history} = this.props;
-        const myBagArr = pokemon.filter(_pokemon => _pokemon.bagId === auth.id)
-        console.log(myBagArr)
-        if(myBagArr.length === 0){
+        const {bags, pokemon, auth, match: {params: {id} }, history} = this.props;
+        const myBagArr = bags.filter(bag => bag.trainerId === auth.id)
+        const myPokemon = [];
+        myBagArr.map(_bagItem => {
+            return (
+                myPokemon.push(pokemon.find(_pokemon => _pokemon.id === _bagItem.pokemonId))
+            )
+        })
+        if(myPokemon.length === 0){
             return(
                 <div>
                     <Link to='/Pokemon'>Back to All Pokemon</Link>
@@ -46,8 +52,8 @@ class MyBag extends Component{
                 </div>
             )
         }
-        if(myBagArr.length > 3){
-            console.log(myBagArr.length)
+        if(myPokemon.length > 3){
+            console.log(myPokemon.length)
             const {onClick} = this
             return(
                 <div>
@@ -55,7 +61,7 @@ class MyBag extends Component{
                         You can only have 3 pokemon in your bag! Remove some to get started!
                     </div>
                     <ul className='myBagPokemonUl'>
-                        {myBagArr.map(_pokemon =>{
+                        {myPokemon.map(_pokemon =>{
                             return(
                                 <li className='myBagPokemonLi' key={_pokemon.id}>
                                     <Link to={`/pokemon/${_pokemon.number}`}>
@@ -75,16 +81,15 @@ class MyBag extends Component{
                 </div>
             )
         }
-        if(myBagArr.length < 3){
+        if(myPokemon.length < 3){
             return(
             <div>
-                {console.log(myBagArr.length)}
                 <Link to='/Pokemon'>Back to All Pokemon</Link>
                 <div>
                     You must have 3 pokemon to start the battle!
                 </div>
                 <ul className='myBagPokemonUl'>
-                    {myBagArr.map(_pokemon =>{
+                    {myPokemon.map(_pokemon =>{
                         return(
                             <li className='myBagPokemonLi' key={_pokemon.id}>
                                 <Link to={`/pokemon/${_pokemon.number}`}>
@@ -96,6 +101,7 @@ class MyBag extends Component{
                                     No. {_pokemon.number}
                                 </div>
                                 </Link>
+                                <button onClick={() => this.removePokemon(_pokemon.number)}>Remove Pokemon</button>
                             </li>
                         )
                     })}
@@ -107,10 +113,9 @@ class MyBag extends Component{
             const {startBattle} = this
             return(
             <div>
-                {console.log(myBagArr.length)}
                 <Link to='/Pokemon'>Back to All Pokemon</Link>
                 <ul className='myBagPokemonUl'>
-                    {myBagArr.map(_pokemon =>{
+                    {myPokemon.map(_pokemon =>{
                         return(
                             <li className='myBagPokemonLi' key={_pokemon.id}>
                                 <Link to={`/pokemon/${_pokemon.number}`}>
@@ -122,6 +127,7 @@ class MyBag extends Component{
                                     No. {_pokemon.number}
                                 </div>
                                 </Link>
+                                <button onClick={() => this.removePokemon(_pokemon.number)}>Remove Pokemon</button>
                             </li>
                         )
                     })}
@@ -135,9 +141,12 @@ class MyBag extends Component{
 
 const mapDispatchToProps = (dispatch, {history}) =>{
     return{
-        updatePokemon: (pokemonId, bagId) =>{
-            dispatch(updatePokemon(pokemonId, bagId, history))
-        }
+        removeFromBag: (bagId) =>{
+            dispatch(removeFromBag(bagId, history))
+        },
+        addToBag: (trainerId, pokemonId) =>{
+            dispatch(addToBag(trainerId, pokemonId, history))
+        },
     }
 }
 

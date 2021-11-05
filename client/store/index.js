@@ -4,10 +4,15 @@ import thunkMiddleware from 'redux-thunk'
 import {composeWithDevTools} from 'redux-devtools-extension'
 import auth from './auth'
 import pokemonReducers from './pokemonReducers'
+import trainerReducers from './trainerReducers'
+import bagReducers from './bagReducers'
 
 const reducer = combineReducers({ 
   auth, 
-  pokemon: pokemonReducers
+  pokemon: pokemonReducers,
+  trainers: trainerReducers,
+  bags: bagReducers,
+
 })
 const middleware = composeWithDevTools(
   applyMiddleware(thunkMiddleware, createLogger({collapsed: true}))

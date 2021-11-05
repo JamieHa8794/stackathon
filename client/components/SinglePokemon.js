@@ -2,7 +2,7 @@ import { render } from 'enzyme';
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom'
-import {updatePokemon} from '../store/pokemonReducers'
+import {addToBag} from '../store/bagReducers'
 
 
 class SinglePokemon extends Component{
@@ -11,8 +11,10 @@ class SinglePokemon extends Component{
         this.onClick = this.onClick.bind(this)
     }
     onClick(){
-        const {pokemon, updatePokemon, auth, match: {params: {id} }, history} = this.props;
-        updatePokemon(id, auth.id);
+        const {addToBag, auth, match: {params: {id} }} = this.props;
+        // updatePokemon(id, auth.id);
+        console.log(id)
+        addToBag(auth.id, id);
     }
     render(){
         const {pokemon, match: {params: {id} }} = this.props;
@@ -69,8 +71,8 @@ class SinglePokemon extends Component{
 
 const mapDispatchToProps = (dispatch, {history}) =>{
     return{
-        updatePokemon: (pokemonId, bagId) =>{
-            dispatch(updatePokemon(pokemonId, bagId, history))
+        addToBag: (trainerId, pokemonId) =>{
+            dispatch(addToBag(trainerId, pokemonId, history))
         }
     }
 }

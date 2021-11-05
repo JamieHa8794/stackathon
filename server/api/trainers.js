@@ -19,7 +19,6 @@ router.post('/', async (req, res, next)=>{
             firstName: req.body.firstName,
             lastName: req.body.lastName,
             imgUrl: req.body.imgUrl,
-            bagId: req.body.id,
         }))
     }
     catch (error){

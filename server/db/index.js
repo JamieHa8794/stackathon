@@ -15,16 +15,16 @@ Trainers.belongsTo(User);
 Types.hasMany(Pokemon);
 Pokemon.belongsTo(Types);
 
-Bags.hasMany(Pokemon);
-Pokemon.belongsTo(Bags);
-// Pokemon.hasMany(Bags);
-// Bags.belongsTo(Pokemon);
+// Bags.hasMany(Pokemon);
+// Pokemon.belongsTo(Bags);
+Pokemon.hasMany(Bags);
+Bags.belongsTo(Pokemon);
 
 
-Bags.hasMany(Trainers);
-Trainers.belongsTo(Bags);
-// Trainers.hasMany(Bags);
-// Bags.belongsTo(Trainers);
+// Bags.hasMany(Trainers);
+// Trainers.belongsTo(Bags);
+Trainers.hasMany(Bags);
+Bags.belongsTo(Trainers);
 
 
 module.exports = {

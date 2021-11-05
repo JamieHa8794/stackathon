@@ -2348,7 +2348,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
 /* harmony import */ var _components_AuthForm__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/AuthForm */ "./client/components/AuthForm.js");
 /* harmony import */ var _components_Home__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/Home */ "./client/components/Home.js");
 /* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./store */ "./client/store/index.js");
@@ -2358,6 +2358,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_MyBag__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/MyBag */ "./client/components/MyBag.js");
 /* harmony import */ var _components_Battle__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/Battle */ "./client/components/Battle.js");
 /* harmony import */ var _store_pokemonReducers__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./store/pokemonReducers */ "./client/store/pokemonReducers.js");
+/* harmony import */ var _store_bagReducers__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./store/bagReducers */ "./client/store/bagReducers.js");
+/* harmony import */ var _store_trainerReducers__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./store/trainerReducers */ "./client/store/trainerReducers.js");
+
+
 
 
 
@@ -2379,43 +2383,47 @@ class Routes extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
     this.props.loadInitialData();
 
     this.props._loadPokemon();
+
+    this.props._loadBags();
+
+    this.props._loadTrainers();
   }
 
   render() {
     const {
       isLoggedIn
     } = this.props;
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_11__.Route, {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_13__.Route, {
       exact: true,
       path: "/pokemon",
       component: _components_Pokemon__WEBPACK_IMPORTED_MODULE_5__["default"]
-    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_11__.Route, {
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_13__.Route, {
       exact: true,
       path: "/pokemon/:id",
       component: _components_SinglePokemon__WEBPACK_IMPORTED_MODULE_6__["default"]
-    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_11__.Route, {
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_13__.Route, {
       exact: true,
       path: "/trainer/addTrainerInfo",
       component: _components_AddTrainerInfo__WEBPACK_IMPORTED_MODULE_7__["default"]
-    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_11__.Route, {
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_13__.Route, {
       exact: true,
       path: "/trainer/myBag",
       component: _components_MyBag__WEBPACK_IMPORTED_MODULE_8__["default"]
-    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_11__.Route, {
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_13__.Route, {
       exact: true,
       path: "/Battle",
       component: _components_Battle__WEBPACK_IMPORTED_MODULE_9__["default"]
-    }), isLoggedIn ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_11__.Switch, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_11__.Route, {
+    }), isLoggedIn ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_13__.Switch, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_13__.Route, {
       path: "/home",
       component: _components_Home__WEBPACK_IMPORTED_MODULE_3__["default"]
-    })) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_11__.Switch, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_11__.Route, {
+    })) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_13__.Switch, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_13__.Route, {
       path: "/",
       exact: true,
       component: _components_AuthForm__WEBPACK_IMPORTED_MODULE_2__.Login
-    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_11__.Route, {
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_13__.Route, {
       path: "/login",
       component: _components_AuthForm__WEBPACK_IMPORTED_MODULE_2__.Login
-    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_11__.Route, {
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_13__.Route, {
       path: "/signup",
       component: _components_AuthForm__WEBPACK_IMPORTED_MODULE_2__.Signup
     })));
@@ -2443,13 +2451,19 @@ const mapDispatch = dispatch => {
 
     _loadPokemon: async () => {
       dispatch((0,_store_pokemonReducers__WEBPACK_IMPORTED_MODULE_10__.loadPokemon)());
+    },
+    _loadBags: async () => {
+      dispatch((0,_store_bagReducers__WEBPACK_IMPORTED_MODULE_11__.loadBags)());
+    },
+    _loadTrainers: async () => {
+      dispatch((0,_store_trainerReducers__WEBPACK_IMPORTED_MODULE_12__.loadTrainers)());
     }
   };
 }; // The `withRouter` wrapper makes sure that updates are not blocked
 // when the url changes
 
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_router_dom__WEBPACK_IMPORTED_MODULE_11__.withRouter)((0,react_redux__WEBPACK_IMPORTED_MODULE_1__.connect)(mapState, mapDispatch)(Routes)));
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_router_dom__WEBPACK_IMPORTED_MODULE_13__.withRouter)((0,react_redux__WEBPACK_IMPORTED_MODULE_1__.connect)(mapState, mapDispatch)(Routes)));
 
 /***/ }),
 
@@ -2467,8 +2481,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _store_trainerReducers__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../store/trainerReducers */ "./client/store/trainerReducers.js");
-/* harmony import */ var _store_bagReducers__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../store/bagReducers */ "./client/store/bagReducers.js");
-
 
 
 
@@ -2539,10 +2551,7 @@ class AddTrainerInfo extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
     } else if (imgUrl === '') {
       window.alert('Please Choose an Avatar');
     } else {
-      this.props.createBag();
-      setTimeout(() => {
-        this.props.createTrainerProfile(id, firstName, lastName, imgUrl);
-      }, 50);
+      this.props.createTrainerProfile(id, firstName, lastName, imgUrl);
     }
   }
 
@@ -2596,7 +2605,7 @@ const mapDispatchToProps = (dispatch, {
 }) => {
   return {
     createBag: () => {
-      dispatch((0,_store_bagReducers__WEBPACK_IMPORTED_MODULE_3__.createBag)());
+      dispatch(createBag());
     },
     createTrainerProfile: (id, firstName, lastName, imgUrl) => {
       dispatch((0,_store_trainerReducers__WEBPACK_IMPORTED_MODULE_2__.createTrainerProfile)(id, firstName, lastName, imgUrl, history));
@@ -2729,9 +2738,11 @@ class Battle extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
   constructor(props) {
     super(props);
     this.state = {
-      opponentBagArr: []
+      myPokemonHp: 0,
+      oppPokemonHp: 0
     };
     this.removePokemon = this.removePokemon.bind(this);
+    this.attack = this.attack.bind(this);
   }
 
   removePokemon(pokemonNumber) {
@@ -2739,13 +2750,21 @@ class Battle extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
       pokemon,
       updatePokemon
     } = this.props;
-    updatePokemon(pokemonNumber, null);
+  }
+
+  attack(_pokemonHealth, _pokemonAttack, _oppPokemonHealth, _oppPokemonAttack) {
+    console.log(_pokemonHealth, _oppPokemonHealth);
+    this.setState({
+      myPokemonHp: _pokemonHealth - Math.round(_oppPokemonAttack * Math.random() * .5),
+      oppPokemonHp: _oppPokemonHealth - Math.round(_pokemonAttack * Math.random() * .5)
+    });
+    console.log('state', this.state);
   }
 
   render() {
-    // pokemon.find(_pokemon => _pokemon.number === Math.round(Math.random()*pokemon.length))
     const {
       pokemon,
+      bags,
       auth,
       match: {
         params: {
@@ -2754,18 +2773,45 @@ class Battle extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
       },
       history
     } = this.props;
-    const myBagArr = pokemon.filter(_pokemon => _pokemon.bagId === auth.id);
+    const myBagArr = bags.filter(_bagItem => _bagItem.trainerId === auth.id);
+    const myPokemon = [];
+    myBagArr.map(_bagItem => {
+      return myPokemon.push(pokemon.find(_pokemon => _pokemon.id === _bagItem.pokemonId));
+    });
+    const opponentBagArr = bags.filter(_bagItem => _bagItem.trainerId === -1000);
+    const oppPokemon = [];
+    opponentBagArr.map(_bagItem => {
+      return oppPokemon.push(pokemon.find(_pokemon => _pokemon.id === _bagItem.pokemonId));
+    });
+
+    if (pokemon.length === 0) {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, "No Pokemon found here :(");
+    }
 
     if (myBagArr.length === 0) {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Link, {
         to: "/Pokemon"
       }, "Back to All Pokemon"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, "Oh No! Looks like all your pokemon have lost."));
+    }
+
+    if (opponentBagArr.length === 0) {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Link, {
+        to: "/Pokemon"
+      }, "Back to All Pokemon"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, "You won!"));
     } else {
-      const _pokemon = myBagArr[0];
-      const {
-        opponentBagArr
-      } = this.state;
-      console.log(opponentBagArr);
+      const _pokemon = myPokemon[0];
+
+      let _pokemonHealth = _pokemon ? _pokemon.hp : 0;
+
+      const _oppPokemon = oppPokemon[0];
+
+      let _oppPokemonHealth = _oppPokemon ? _oppPokemon.hp : 0; // const {_pokemon, _oppPokemon, _pokemonHealth, _oppPokemonHealth} = this.state;
+
+
+      if (_pokemon === undefined) {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, "No Pokemon found here");
+      }
+
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "battle"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
@@ -2774,13 +2820,15 @@ class Battle extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
         src: `../images/${_pokemon.name}.png`
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, _pokemon.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, "No. ", _pokemon.number), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "stats"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, "HP: ", _pokemon.hp), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, "Attack: ", _pokemon.attack), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, "Defense: ", _pokemon.defense), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, "Speed: ", _pokemon.speed))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, "HP: ", _pokemonHealth), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, "Attack: ", _pokemon.attack), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, "Defense: ", _pokemon.defense), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, "Speed: ", _pokemon.speed)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+        onClick: () => this.attack(_pokemonHealth, _pokemon.attack, _oppPokemonHealth, _oppPokemon.attack)
+      }, "Attack!")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "battleOpponentPokemon"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("img", {
-        src: `../images/${_pokemon.name}.png`
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, _pokemon.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, "No. ", _pokemon.number), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        src: `../images/${_oppPokemon.name}.png`
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, _oppPokemon.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, "No. ", _oppPokemon.number), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "stats"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, "HP: ", _pokemon.hp), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, "Attack: ", _pokemon.attack), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, "Defense: ", _pokemon.defense), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, "Speed: ", _pokemon.speed))));
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, "HP: ", _oppPokemonHealth), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, "Attack: ", _oppPokemon.attack), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, "Defense: ", _oppPokemon.defense), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, "Speed: ", _oppPokemon.speed))));
     }
   }
 
@@ -2858,7 +2906,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
-/* harmony import */ var _store_pokemonReducers__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../store/pokemonReducers */ "./client/store/pokemonReducers.js");
+/* harmony import */ var _store_bagReducers__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../store/bagReducers */ "./client/store/bagReducers.js");
+
 
 
 
@@ -2876,34 +2925,8 @@ class MyBag extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
 
   removePokemon(pokemonNumber) {
     const {
-      pokemon,
-      updatePokemon
-    } = this.props;
-    console.log(pokemonNumber);
-    updatePokemon(pokemonNumber, null);
-  }
-
-  startBattle() {
-    const {
-      pokemon,
-      updatePokemon
-    } = this.props; // while(pokemon.filter(_pokemon => _pokemon.bagId === -1000).length < 3){
-    //     let pokemonNumber = Math.round(Math.random()*pokemon.length)
-    //     updatePokemon(pokemonNumber, -1000);
-    // }
-
-    if (pokemon.filter(_pokemon => _pokemon.bagId === -1000).length < 3) {
-      for (let i = 0; i < 3; i++) {
-        let pokemonNumber = Math.round(Math.random() * pokemon.length);
-        updatePokemon(pokemonNumber, -1000);
-      }
-    }
-
-    console.log(pokemon.filter(_pokemon => _pokemon.bagId === -1000));
-  }
-
-  render() {
-    const {
+      bags,
+      removeFromBag,
       pokemon,
       auth,
       match: {
@@ -2913,23 +2936,73 @@ class MyBag extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
       },
       history
     } = this.props;
-    const myBagArr = pokemon.filter(_pokemon => _pokemon.bagId === auth.id);
+    const myBagArr = bags.filter(bag => bag.trainerId === auth.id);
+
+    const _bagItem = myBagArr.find(_bag => _bag.pokemonId === pokemonNumber);
+
+    removeFromBag(_bagItem.id);
+  }
+
+  startBattle() {
+    const {
+      bags,
+      addToBag,
+      pokemon,
+      auth,
+      match: {
+        params: {
+          id
+        }
+      },
+      history
+    } = this.props;
+    let myBagArr = bags.filter(bag => bag.trainerId === -1000);
     console.log(myBagArr);
 
-    if (myBagArr.length === 0) {
+    if (myBagArr.length < 3) {
+      for (let i = 0; i < 3 - myBagArr.length; i++) {
+        console.log(Math.round(Math.random() * pokemon.length));
+        addToBag(-1000, Math.round(Math.random() * pokemon.length));
+      }
+    }
+
+    if (myBagArr.length === 3) {
+      history.push('/Battle');
+    }
+  }
+
+  render() {
+    const {
+      bags,
+      pokemon,
+      auth,
+      match: {
+        params: {
+          id
+        }
+      },
+      history
+    } = this.props;
+    const myBagArr = bags.filter(bag => bag.trainerId === auth.id);
+    const myPokemon = [];
+    myBagArr.map(_bagItem => {
+      return myPokemon.push(pokemon.find(_pokemon => _pokemon.id === _bagItem.pokemonId));
+    });
+
+    if (myPokemon.length === 0) {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Link, {
         to: "/Pokemon"
       }, "Back to All Pokemon"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, "Theres no pokemon in your bag! Choose one to get started!"));
     }
 
-    if (myBagArr.length > 3) {
-      console.log(myBagArr.length);
+    if (myPokemon.length > 3) {
+      console.log(myPokemon.length);
       const {
         onClick
       } = this;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, "You can only have 3 pokemon in your bag! Remove some to get started!"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", {
         className: "myBagPokemonUl"
-      }, myBagArr.map(_pokemon => {
+      }, myPokemon.map(_pokemon => {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
           className: "myBagPokemonLi",
           key: _pokemon.id
@@ -2943,12 +3016,12 @@ class MyBag extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
       })));
     }
 
-    if (myBagArr.length < 3) {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, console.log(myBagArr.length), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Link, {
+    if (myPokemon.length < 3) {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Link, {
         to: "/Pokemon"
       }, "Back to All Pokemon"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, "You must have 3 pokemon to start the battle!"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", {
         className: "myBagPokemonUl"
-      }, myBagArr.map(_pokemon => {
+      }, myPokemon.map(_pokemon => {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
           className: "myBagPokemonLi",
           key: _pokemon.id
@@ -2956,17 +3029,19 @@ class MyBag extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
           to: `/pokemon/${_pokemon.number}`
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("img", {
           src: `../images/${_pokemon.name}.png`
-        }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, _pokemon.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, "No. ", _pokemon.number)));
+        }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, _pokemon.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, "No. ", _pokemon.number)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+          onClick: () => this.removePokemon(_pokemon.number)
+        }, "Remove Pokemon"));
       })));
     } else {
       const {
         startBattle
       } = this;
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, console.log(myBagArr.length), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Link, {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Link, {
         to: "/Pokemon"
       }, "Back to All Pokemon"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", {
         className: "myBagPokemonUl"
-      }, myBagArr.map(_pokemon => {
+      }, myPokemon.map(_pokemon => {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
           className: "myBagPokemonLi",
           key: _pokemon.id
@@ -2974,7 +3049,9 @@ class MyBag extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
           to: `/pokemon/${_pokemon.number}`
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("img", {
           src: `../images/${_pokemon.name}.png`
-        }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, _pokemon.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, "No. ", _pokemon.number)));
+        }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, _pokemon.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, "No. ", _pokemon.number)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+          onClick: () => this.removePokemon(_pokemon.number)
+        }, "Remove Pokemon"));
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
         onClick: startBattle
       }, "Lets Start Battling!"));
@@ -2987,8 +3064,11 @@ const mapDispatchToProps = (dispatch, {
   history
 }) => {
   return {
-    updatePokemon: (pokemonId, bagId) => {
-      dispatch((0,_store_pokemonReducers__WEBPACK_IMPORTED_MODULE_2__.updatePokemon)(pokemonId, bagId, history));
+    removeFromBag: bagId => {
+      dispatch((0,_store_bagReducers__WEBPACK_IMPORTED_MODULE_2__.removeFromBag)(bagId, history));
+    },
+    addToBag: (trainerId, pokemonId) => {
+      dispatch((0,_store_bagReducers__WEBPACK_IMPORTED_MODULE_2__.addToBag)(trainerId, pokemonId, history));
     }
   };
 };
@@ -3135,7 +3215,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
-/* harmony import */ var _store_pokemonReducers__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../store/pokemonReducers */ "./client/store/pokemonReducers.js");
+/* harmony import */ var _store_bagReducers__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../store/bagReducers */ "./client/store/bagReducers.js");
 
 
 
@@ -3150,17 +3230,17 @@ class SinglePokemon extends react__WEBPACK_IMPORTED_MODULE_1__.Component {
 
   onClick() {
     const {
-      pokemon,
-      updatePokemon,
+      addToBag,
       auth,
       match: {
         params: {
           id
         }
-      },
-      history
-    } = this.props;
-    updatePokemon(id, auth.id);
+      }
+    } = this.props; // updatePokemon(id, auth.id);
+
+    console.log(id);
+    addToBag(auth.id, id);
   }
 
   render() {
@@ -3208,8 +3288,8 @@ const mapDispatchToProps = (dispatch, {
   history
 }) => {
   return {
-    updatePokemon: (pokemonId, bagId) => {
-      dispatch((0,_store_pokemonReducers__WEBPACK_IMPORTED_MODULE_3__.updatePokemon)(pokemonId, bagId, history));
+    addToBag: (trainerId, pokemonId) => {
+      dispatch((0,_store_bagReducers__WEBPACK_IMPORTED_MODULE_3__.addToBag)(trainerId, pokemonId, history));
     }
   };
 };
@@ -3338,22 +3418,29 @@ const logout = () => {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__),
+/* harmony export */   "_loadBags": () => (/* binding */ _loadBags),
 /* harmony export */   "loadBags": () => (/* binding */ loadBags),
-/* harmony export */   "createBag": () => (/* binding */ createBag)
+/* harmony export */   "addToBag": () => (/* binding */ addToBag),
+/* harmony export */   "removeFromBag": () => (/* binding */ removeFromBag)
 /* harmony export */ });
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 
 const LOAD_BAGS = 'LOAD_BAGS';
-const CREATE_BAG = 'CREATE_BAG';
+const ADD_TO_BAG = 'ADD_TO_BAG';
+const REMOVE_FROM_BAG = 'REMOVE_FROM_BAG';
 
 const bagReducers = (state = [], action) => {
   if (action.type === LOAD_BAGS) {
-    state = action.pokemon;
+    state = action.bag;
   }
 
-  if (action.type === CREATE_BAG) {
+  if (action.type === ADD_TO_BAG) {
     state = [...state, action.bag];
+  }
+
+  if (action.type === REMOVE_FROM_BAG) {
+    state = state.filter(bag => bag.id !== action.bagId);
   }
 
   return state;
@@ -3369,21 +3456,40 @@ const loadBags = () => {
 const _loadBags = bag => {
   return {
     type: LOAD_BAGS,
-    pokemon
-  };
-};
-
-const createBag = () => {
-  return async dispatch => {
-    const bag = (await axios__WEBPACK_IMPORTED_MODULE_0___default().post('/api/bags')).data;
-    dispatch(_createBag(bag));
-  };
-};
-
-const _createBag = bag => {
-  return {
-    type: CREATE_BAG,
     bag
+  };
+};
+
+const addToBag = (trainerId, pokemonId, history) => {
+  return async dispatch => {
+    const bag = (await axios__WEBPACK_IMPORTED_MODULE_0___default().post('/api/bags', {
+      trainerId,
+      pokemonId
+    })).data;
+    dispatch(_addToBag(bag));
+    history.push('/trainer/myBag');
+  };
+};
+
+const _addToBag = bag => {
+  return {
+    type: ADD_TO_BAG,
+    bag
+  };
+};
+
+const removeFromBag = (bagId, history) => {
+  return async dispatch => {
+    axios__WEBPACK_IMPORTED_MODULE_0___default()["delete"](`/api/bags/${bagId}`);
+    dispatch(_removeFromBag(bagId));
+    history.push(`/trainer/myBag`);
+  };
+};
+
+const _removeFromBag = bagId => {
+  return {
+    type: REMOVE_FROM_BAG,
+    bagId
   };
 };
 
@@ -3406,27 +3512,33 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "logout": () => (/* reexport safe */ _auth__WEBPACK_IMPORTED_MODULE_2__.logout),
 /* harmony export */   "me": () => (/* reexport safe */ _auth__WEBPACK_IMPORTED_MODULE_2__.me)
 /* harmony export */ });
-/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
+/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
 /* harmony import */ var redux_logger__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! redux-logger */ "./node_modules/redux-logger/dist/redux-logger.js");
 /* harmony import */ var redux_logger__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(redux_logger__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var redux_thunk__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! redux-thunk */ "./node_modules/redux-thunk/es/index.js");
+/* harmony import */ var redux_thunk__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! redux-thunk */ "./node_modules/redux-thunk/es/index.js");
 /* harmony import */ var redux_devtools_extension__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! redux-devtools-extension */ "./node_modules/redux-devtools-extension/index.js");
 /* harmony import */ var _auth__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./auth */ "./client/store/auth.js");
 /* harmony import */ var _pokemonReducers__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./pokemonReducers */ "./client/store/pokemonReducers.js");
+/* harmony import */ var _trainerReducers__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./trainerReducers */ "./client/store/trainerReducers.js");
+/* harmony import */ var _bagReducers__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./bagReducers */ "./client/store/bagReducers.js");
 
 
 
 
 
 
-const reducer = (0,redux__WEBPACK_IMPORTED_MODULE_4__.combineReducers)({
+
+
+const reducer = (0,redux__WEBPACK_IMPORTED_MODULE_6__.combineReducers)({
   auth: _auth__WEBPACK_IMPORTED_MODULE_2__["default"],
-  pokemon: _pokemonReducers__WEBPACK_IMPORTED_MODULE_3__["default"]
+  pokemon: _pokemonReducers__WEBPACK_IMPORTED_MODULE_3__["default"],
+  trainers: _trainerReducers__WEBPACK_IMPORTED_MODULE_4__["default"],
+  bags: _bagReducers__WEBPACK_IMPORTED_MODULE_5__["default"]
 });
-const middleware = (0,redux_devtools_extension__WEBPACK_IMPORTED_MODULE_1__.composeWithDevTools)((0,redux__WEBPACK_IMPORTED_MODULE_4__.applyMiddleware)(redux_thunk__WEBPACK_IMPORTED_MODULE_5__["default"], (0,redux_logger__WEBPACK_IMPORTED_MODULE_0__.createLogger)({
+const middleware = (0,redux_devtools_extension__WEBPACK_IMPORTED_MODULE_1__.composeWithDevTools)((0,redux__WEBPACK_IMPORTED_MODULE_6__.applyMiddleware)(redux_thunk__WEBPACK_IMPORTED_MODULE_7__["default"], (0,redux_logger__WEBPACK_IMPORTED_MODULE_0__.createLogger)({
   collapsed: true
 })));
-const store = (0,redux__WEBPACK_IMPORTED_MODULE_4__.createStore)(reducer, middleware);
+const store = (0,redux__WEBPACK_IMPORTED_MODULE_6__.createStore)(reducer, middleware);
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (store);
 
 
@@ -3442,22 +3554,16 @@ const store = (0,redux__WEBPACK_IMPORTED_MODULE_4__.createStore)(reducer, middle
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__),
-/* harmony export */   "loadPokemon": () => (/* binding */ loadPokemon),
-/* harmony export */   "updatePokemon": () => (/* binding */ updatePokemon)
+/* harmony export */   "loadPokemon": () => (/* binding */ loadPokemon)
 /* harmony export */ });
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 
 const LOAD_POKEMON = 'LOAD_POKEMON';
-const UPDATE_POKEMON = 'UPDATE_POKEMON';
 
 const pokemonReducers = (state = [], action) => {
   if (action.type === LOAD_POKEMON) {
     state = action.pokemon;
-  }
-
-  if (action.type === UPDATE_POKEMON) {
-    state = state.map(pokemon => pokemon.id !== action.pokemon.id ? pokemon : action.pokemon);
   }
 
   return state;
@@ -3477,23 +3583,6 @@ const _loadPokemon = pokemon => {
   };
 };
 
-const updatePokemon = (pokemonId, bagId, history) => {
-  return async dispatch => {
-    const pokemon = (await axios__WEBPACK_IMPORTED_MODULE_0___default().put(`/api/pokemon/${pokemonId}`, {
-      bagId
-    })).data;
-    dispatch(_updatePokemon(pokemon));
-    history.push('/trainer/myBag');
-  };
-};
-
-const _updatePokemon = pokemon => {
-  return {
-    type: UPDATE_POKEMON,
-    pokemon
-  };
-};
-
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (pokemonReducers);
 
 
@@ -3509,6 +3598,7 @@ const _updatePokemon = pokemon => {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__),
+/* harmony export */   "_loadTrainers": () => (/* binding */ _loadTrainers),
 /* harmony export */   "loadTrainers": () => (/* binding */ loadTrainers),
 /* harmony export */   "createTrainerProfile": () => (/* binding */ createTrainerProfile),
 /* harmony export */   "updateTrainerInfo": () => (/* binding */ updateTrainerInfo)
