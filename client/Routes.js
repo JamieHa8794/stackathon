@@ -9,9 +9,14 @@ import SinglePokemon from './components/SinglePokemon'
 import AddTrainerInfo from './components/AddTrainerInfo'
 import MyBag from './components/MyBag'
 import Battle from './components/Battle'
+import HowToPlay from './components/HowToPlay'
 import {_loadPokemon, loadPokemon} from './store/pokemonReducers'
 import {_loadBags, loadBags} from './store/bagReducers'
 import {_loadTrainers, loadTrainers} from './store/trainerReducers'
+import {_loadTypes, loadTypes} from './store/typesReducers'
+import MyProfile from './components/MyProfile';
+import YouWon from './components/YouWon';
+import YouLost from './components/YouLost';
 
 
 /**
@@ -23,6 +28,7 @@ class Routes extends Component {
     this.props._loadPokemon();
     this.props._loadBags();
     this.props._loadTrainers();
+    this.props._loadTypes();
   }
 
   render() {
@@ -34,9 +40,13 @@ class Routes extends Component {
         <Route exact path='/trainer/addTrainerInfo' component={AddTrainerInfo}/>
         <Route exact path='/trainer/myBag' component={MyBag}/>
         <Route exact path='/Battle' component={Battle}/>
+        <Route exact path='/HowToPlay' component={HowToPlay}/>
+        <Route exact path='/YouWon' component={YouWon}/>
+        <Route exact path='/YouLost' component={YouLost}/>
         {isLoggedIn ? (
           <Switch>
             <Route path="/home" component={Home} />
+            <Route exact path='/MyProfile' component={MyProfile}/>
             {/* <Redirect to="/home" /> */}
           </Switch>
         ) : (
@@ -75,7 +85,11 @@ const mapDispatch = dispatch => {
     },
     _loadTrainers: async () =>{
       dispatch(loadTrainers())
+    },
+    _loadTypes: async () =>{
+      dispatch(loadTypes())
     }
+
   }
 }
 

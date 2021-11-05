@@ -21,6 +21,7 @@ class MyBag extends Component{
         history.push(`/trainer/myBag`)
     }
     startBattle(){
+
         const {bags, addToBag, pokemon, auth, match: {params: {id} }, history} = this.props;
         let myBagArr = bags.filter(bag => bag.trainerId === -1000)
         console.log(myBagArr)
@@ -30,8 +31,11 @@ class MyBag extends Component{
                 addToBag(-1000, Math.round(Math.random()*pokemon.length))
             }
         }
-        
-        history.push('/Battle');
+        // if(myBagArr.length === 3){
+        //     history.push('/Battle')
+        // }
+        setTimeout(()=> {history.push('/Battle')}, 50)
+       
         
     }
     render(){
@@ -47,15 +51,12 @@ class MyBag extends Component{
         if(pokemon.length === 0){
             return(<div>No Pokemon Here :(</div>)
         }
-        if(bags.length === 0){
-            return(<div>No Pokemon Here :(</div>)
-        }
-
+        
         if(auth.id === undefined){
             return(<div>Whoops... auth didnt load</div>)
         }
-
-
+        
+        
         if(myPokemon.length === 0){
             return(
                 <div>
@@ -66,6 +67,11 @@ class MyBag extends Component{
                 </div>
             )
         }
+
+        if(bags.length === 0){
+            return(<div>No Pokemon Here :(</div>)
+        }
+
         if(myPokemon.length > 3){
             console.log(myPokemon.length)
             const {onClick} = this

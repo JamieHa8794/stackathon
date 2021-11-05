@@ -12,6 +12,12 @@ const Trainers = db.define('trainer', {
     imgUrl:{
         type: STRING(10000)
     },
+    wins:{
+        type: INTEGER
+    },
+    losses:{
+        type: INTEGER
+    }
 })
 
 module.exports = Trainers;

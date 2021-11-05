@@ -29,4 +29,4 @@ const _loadPokemon = (pokemon) =>{
 
 
 export default pokemonReducers;
-export {loadPokemon}
+export {loadPokemon, _loadPokemon}

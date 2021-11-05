@@ -11,13 +11,14 @@ class SinglePokemon extends Component{
         this.onClick = this.onClick.bind(this)
     }
     onClick(){
-        const {addToBag, auth, match: {params: {id} }} = this.props;
+        const {addToBag, auth, match: {params: {id} }, history} = this.props;
         // updatePokemon(id, auth.id);
         console.log(id)
         addToBag(auth.id, id);
+        history.push('/trainer/myBag')
     }
     render(){
-        const {pokemon, match: {params: {id} }} = this.props;
+        const {pokemon, types, match: {params: {id} }} = this.props;
         const {onClick} = this
 
         if(pokemon.length === 0){
@@ -27,6 +28,13 @@ class SinglePokemon extends Component{
         if(_pokemon === undefined){
             return(<div>No Pokemon found here :(</div>)
         }
+        if(types.length === 0){
+            return(<div>No types found</div>)
+        }
+
+        const _type = types.find(_type => _type.id === _pokemon.typeId).type
+
+
 
         return(
             <div>
@@ -42,10 +50,10 @@ class SinglePokemon extends Component{
                             No. {_pokemon.number}
                         </div>
                         <div>
-                            Type: {_pokemon.type}
+                            Type: {_type}
                         </div>
                         <div>
-                            {_pokemon.description}
+                            About Me: {_pokemon.description}
                         </div>
                         <div className='stats'> 
                             <div>

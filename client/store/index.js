@@ -6,12 +6,14 @@ import auth from './auth'
 import pokemonReducers from './pokemonReducers'
 import trainerReducers from './trainerReducers'
 import bagReducers from './bagReducers'
+import typesReducers from './typesReducers'
 
 const reducer = combineReducers({ 
   auth, 
   pokemon: pokemonReducers,
   trainers: trainerReducers,
   bags: bagReducers,
+  types: typesReducers,
 
 })
 const middleware = composeWithDevTools(

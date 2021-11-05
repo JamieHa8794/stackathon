@@ -19,6 +19,8 @@ router.post('/', async (req, res, next)=>{
             firstName: req.body.firstName,
             lastName: req.body.lastName,
             imgUrl: req.body.imgUrl,
+            wins: 0,
+            losses: 0,
         }))
     }
     catch (error){
@@ -33,6 +35,8 @@ router.put('/:id', async (req, res, next)=>{
             firstName: req.body.firstName,
             lastName: req.body.lastName,
             imgUrl: req.body.imgUrl,
+            wins: req.body.win,
+            losses: req.body.loss
         }))
     }
     catch (error){

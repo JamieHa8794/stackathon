@@ -46,11 +46,11 @@ const _createTrainerProfile = (trainer) =>{
     }
 }
 
-const updateTrainerInfo = (id, firstName, lastName, imgUrl, history) =>{
+const updateTrainerInfo = (id, firstName, lastName, imgUrl, win, loss, history) =>{
     return async (dispatch) =>{
-        const trainer = (await axios.put(`/api/trainers/${id}`, {firstName, lastName, imgUrl})).data;
+        const trainer = (await axios.put(`/api/trainers/${id}`, {firstName, lastName, imgUrl, win, loss})).data;
         dispatch(_updateTrainerInfo(trainer))
-        history.push('/api/trainers/${id}');
+        // history.push('/api/trainers/${id}');
     }
 }
 

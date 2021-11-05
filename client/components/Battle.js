@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom'
 import { removeFromBag } from '../store/bagReducers';
-
+import {updateTrainerInfo} from '../store/trainerReducers';
 
 
 class Battle extends Component{
@@ -13,20 +13,15 @@ class Battle extends Component{
             _oppPokemon: {},
             _pokemonHealth: 0,
             _oppPokemonHealth : 0,
+            _myCount: 0,
+            _oppCount: 0,
         }
         this.removePokemon = this.removePokemon.bind(this);
         this.attack = this.attack.bind(this)
     }
-    componentDidUpdate(prevProps, prevState){
-        
-        
-        // console.log('prevState._pokemonHealth === 0', prevState.myPokemonHp === 0)
-        // console.log('this.props.pokemon.length !== 0', this.props.pokemon.length !== 0)
-        // console.log('this.props.bags.length !== 0', this.props.bags.length !== 0)
-        // console.log('this.props.auth !== undefined', this.props.auth !== undefined)
-        // console.log(this.props.auth.id)
-
-        if((prevState._pokemonHealth <= 0 || prevState._oppPokemonHealth <= 0) && this.props.pokemon.length !== 0 && this.props.bags.length !== 0 && this.props.auth.id !== undefined){
+    componentDidMount(){
+        console.log('hererererere')
+        if(this.props.pokemon.length !== 0 && this.props.bags.length !== 0 && this.props.auth.id !== undefined){
             const {pokemon, bags, auth, match: {params: {id} }, history} = this.props;
             const myBagArr = bags.filter(_bagItem => _bagItem.trainerId === auth.id)
             const myPokemon = [];
@@ -35,35 +30,43 @@ class Battle extends Component{
                     myPokemon.push(pokemon.find(_pokemon => _pokemon.id === _bagItem.pokemonId))
                 )
             })
-            const opponentBagArr = bags.filter(_bagItem => _bagItem.trainerId === -1000)
-            const oppPokemon = [];
-            opponentBagArr.map(_bagItem => {
-                return (
-                    oppPokemon.push(pokemon.find(_pokemon => _pokemon.id === _bagItem.pokemonId))
-                )
-            })
+           
 
             const _pokemon = myPokemon[0];
-            console.log('myPokemon[0]', myPokemon[0])
             let _pokemonHealth = _pokemon ? _pokemon.hp : 0
-            const _oppPokemon = oppPokemon[0];
-            console.log('oppPokemon[0]', oppPokemon[0])
-            let _oppPokemonHealth = _oppPokemon ? _oppPokemon.hp : 0
 
-            // console.log('prevProps' , prevProps)
-            // console.log('prevState', prevState)
-            // console.log('this.props', this.props)
 
             this.setState({
                 _pokemon: _pokemon,
-                _oppPokemon: _oppPokemon,
                 _pokemonHealth: _pokemonHealth,
-                _oppPokemonHealth : _oppPokemonHealth,
             })
-            console.log('this.state', this.state)
         }
 
-                if((prevState._pokemonHealth <= 0 || prevState._oppPokemonHealth <= 0) && this.props.pokemon.length !== 0 && this.props.bags.length !== 0 && this.props.auth.id !== undefined){
+        if(this.props.pokemon.length !== 0 && this.props.bags.length !== 0 && this.props.auth.id !== undefined){
+            const {pokemon, bags, auth, match: {params: {id} }, history} = this.props;
+            
+            const opponentBagArr = bags.filter(_bagItem => _bagItem.trainerId === -1000)
+            const oppPokemon = [];
+            opponentBagArr.map(_bagItem => {
+                return (
+                    oppPokemon.push(pokemon.find(_pokemon => _pokemon.id === _bagItem.pokemonId))
+                )
+            })
+            
+            const _oppPokemon = oppPokemon[0];
+            let _oppPokemonHealth = _oppPokemon ? _oppPokemon.hp : 0
+
+            this.setState({
+                _oppPokemon: _oppPokemon,
+                _oppPokemonHealth : _oppPokemonHealth,
+            })
+        }
+        console.log('componenetDidMount', this.state)
+    }
+    componentDidUpdate(prevProps, prevState){
+        console.log('prevProps', prevProps)
+        console.log('prevState', prevState)
+        if(prevState._pokemonHealth <= 0 && this.props.pokemon.length !== 0 && this.props.bags.length !== 0 && this.props.auth.id !== undefined){
             const {pokemon, bags, auth, match: {params: {id} }, history} = this.props;
             const myBagArr = bags.filter(_bagItem => _bagItem.trainerId === auth.id)
             const myPokemon = [];
@@ -72,6 +75,21 @@ class Battle extends Component{
                     myPokemon.push(pokemon.find(_pokemon => _pokemon.id === _bagItem.pokemonId))
                 )
             })
+           
+
+            const _pokemon = myPokemon[0];
+            let _pokemonHealth = _pokemon ? _pokemon.hp : 0
+
+
+            this.setState({
+                _pokemon: _pokemon,
+                _pokemonHealth: _pokemonHealth,
+            })
+        }
+
+        if(prevState._oppPokemonHealth <= 0 && this.props.pokemon.length !== 0 && this.props.bags.length !== 0 && this.props.auth.id !== undefined){
+            const {pokemon, bags, auth, match: {params: {id} }, history} = this.props;
+            
             const opponentBagArr = bags.filter(_bagItem => _bagItem.trainerId === -1000)
             const oppPokemon = [];
             opponentBagArr.map(_bagItem => {
@@ -79,25 +97,15 @@ class Battle extends Component{
                     oppPokemon.push(pokemon.find(_pokemon => _pokemon.id === _bagItem.pokemonId))
                 )
             })
-
-            const _pokemon = myPokemon[0];
-            console.log('myPokemon[0]', myPokemon[0])
-            let _pokemonHealth = _pokemon ? _pokemon.hp : 0
+            
             const _oppPokemon = oppPokemon[0];
-            console.log('oppPokemon[0]', oppPokemon[0])
             let _oppPokemonHealth = _oppPokemon ? _oppPokemon.hp : 0
 
-            // console.log('prevProps' , prevProps)
-            // console.log('prevState', prevState)
-            // console.log('this.props', this.props)
-
             this.setState({
-                _pokemon: _pokemon,
                 _oppPokemon: _oppPokemon,
-                _pokemonHealth: _pokemonHealth,
                 _oppPokemonHealth : _oppPokemonHealth,
             })
-            console.log('this.state', this.state)
+
         }
 
     }
@@ -108,37 +116,92 @@ class Battle extends Component{
     }
 
     attack(_pokemonAttack, _pokemonDefense, _oppPokemonAttack, _oppPokemonDefense){
+        // debugger;
         const {pokemon, removeFromBag, bags, auth, history} = this.props;
-        const {_pokemonHealth, _oppPokemonHealth} = this.state
-        console.log(_pokemonHealth, _oppPokemonHealth)
+        const {_pokemonHealth, _oppPokemonHealth, _myCount, _oppCount} = this.state
 
-        this.setState({
-            _pokemonHealth: (_pokemonHealth - Math.round(_oppPokemonAttack*Math.random()*.5)),
-            _oppPokemonHealth: (_oppPokemonHealth - Math.round(_pokemonAttack*Math.random()*.5)),
-            // _pokemonHealth: (_pokemonHealth - (_pokemonAttack - _oppPokemonAttack) ),
-            // _oppPokemonHealth: (_oppPokemonHealth - (_oppPokemonDefense - _pokemonAttack) )
-        })
-        console.log('state', this.state)
 
-        if(this.state._pokemonHealth <= 0){
+
+        const newPokemonHp = (_pokemonHealth - Math.round(_oppPokemonAttack*Math.random()*.5))
+        const newOppPokemonHp = (_oppPokemonHealth - Math.round(_pokemonAttack*Math.random()*.5))
+
+        // const newPokemonHp = (_pokemonHealth - Math.round((_pokemonDefense - _oppPokemonAttack)*Math.random()*.5))
+        // console.log('oppAttack',Math.round((_pokemonDefense - _oppPokemonAttack)*Math.random()*.5))
+        // const newOppPokemonHp = (_oppPokemonHealth - Math.round((_oppPokemonDefense - _pokemonAttack)*Math.random()*.5))
+        // console.log('pokemonAttack', Math.round((_oppPokemonDefense - _pokemonAttack)*Math.random()*.5))
+
+
+        if(newPokemonHp <=0){
+
+            this.setState({
+                _pokemonHealth: 0,
+            })
+
             const myBagArr = bags.filter(_bagItem => _bagItem.trainerId === auth.id)
+            const myPokemon = [];
+            myBagArr.map(_bagItem => {
+                return (
+                    myPokemon.push(pokemon.find(_pokemon => _pokemon.id === _bagItem.pokemonId))
+                )
+            })
+            
+            
             const _toRemove = myBagArr.find(_bagItem => _bagItem.pokemonId === this.state._pokemon.id).id
-            console.log(_toRemove)
+            this.setState({_myCount : _myCount +1 })
             removeFromBag(_toRemove)
+            const _pokemon = myPokemon[1];
+            
+            console.log('pokemon[0]', pokemon[0])
+            console.log('pokemon[1]', pokemon[1])
+
+            this.setState({
+                _pokemon: _pokemon,
+                _pokemonHealth: _pokemon ? _pokemon.hp : 0,
+            })
+
         }
-        if(this.state._oppPokemonHealth <= 0){
-            console.log('here')
+        else if(newOppPokemonHp <= 0){
+            this.setState({
+                _oppPokemonHealth: 0
+            })
+
             const opponentBagArr = bags.filter(_bagItem => _bagItem.trainerId === -1000)
+            const oppPokemon = [];
+            opponentBagArr.map(_bagItem => {
+                return (
+                    oppPokemon.push(pokemon.find(_pokemon => _pokemon.id === _bagItem.pokemonId))
+                )
+            })
+
+            
+            
             const _toRemove = opponentBagArr.find(_bagItem => _bagItem.pokemonId === this.state._oppPokemon.id).id
-            console.log(_toRemove)
+            this.setState({_oppCount : _oppCount + 1})
             removeFromBag(_toRemove)
+            
+            console.log('oppPokemon[0]', oppPokemon[0])
+            console.log('oppPokemon[1]', oppPokemon[1])
+            const _oppPokemon = oppPokemon[1];
+
+            this.setState({
+                _oppPokemon: _oppPokemon,
+                _oppPokemonHealth : _oppPokemon ? _oppPokemon.hp : 0,
+            })
         }
+        else{
+            this.setState({
+                _pokemonHealth: newPokemonHp,
+                _oppPokemonHealth: newOppPokemonHp,
+            })
+        }
+
+       
     }
 
     render(){
-        const {pokemon, bags, auth, match: {params: {id} }, history} = this.props;
+        const {pokemon, bags, trainers, auth, match: {params: {id} }, history} = this.props;
         const myBagArr = bags.filter(_bagItem => _bagItem.trainerId === auth.id)
-        console.log(this.state)
+
         // const myPokemon = [];
         // myBagArr.map(_bagItem => {
         //     return (
@@ -153,7 +216,31 @@ class Battle extends Component{
         //     )
         // })
         
-        
+        if(trainers.length === 0){
+            return(
+                <div>
+                    Whoops Trainers didnt load..
+                </div>
+            )
+        }
+        if(auth.id === undefined){
+            return(<div>
+                Whoops.. your auth id didnt load..
+            </div>)
+        }
+        if(this.state._myCount === 2){
+            const {updateTrainerInfo, trainer, history} = this.props
+            const _trainer = trainers.find(_trainer => _trainer.id === auth.id)
+            updateTrainerInfo(_trainer.id, _trainer.firstName, _trainer.lastName, _trainer.imgUrl, _trainer.wins, _trainer.losses + 1)
+            history.push('/YouLost')
+
+        }
+        if(this.state._oppCount === 2){
+            const {updateTrainerInfo, trainers} = this.props
+            const _trainer = trainers.find(_trainer => _trainer.id === auth.id)
+            updateTrainerInfo(_trainer.id, _trainer.firstName, _trainer.lastName, _trainer.imgUrl, _trainer.wins + 1, _trainer.losses)
+            history.push('/YouWon')
+        }
         if(pokemon.length === 0){
             return(<div>No Pokemon found here :(</div>)
         }
@@ -254,6 +341,9 @@ const mapDispatchToProps = (dispatch, {history}) =>{
         removeFromBag: (bagId) =>{
             dispatch(removeFromBag(bagId, history))
         },
+        updateTrainerInfo : (id, firstName, lastName, imgUrl, win, loss) =>{
+            dispatch(updateTrainerInfo(id, firstName, lastName, imgUrl, win, loss, history))
+        }
     }
 }
 

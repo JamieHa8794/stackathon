@@ -36,7 +36,7 @@ const addToBag = (trainerId, pokemonId, history) =>{
     return async (dispatch) =>{
         const bag = (await axios.post('/api/bags', {trainerId, pokemonId})).data;
         dispatch(_addToBag(bag));
-        history.push('/trainer/myBag')
+        // history.push('/trainer/myBag')
     }
 }
 

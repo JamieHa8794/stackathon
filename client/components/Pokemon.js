@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom'
+import MyBag from './MyBag';
 
 class Pokemon extends Component{
     constructor(props){
@@ -17,7 +18,6 @@ class Pokemon extends Component{
         const {pokemon} = this.props;
         return(
         <div>
-            <Link to='/trainer/myBag'>View My Bag</Link>
             <ul className='pokemonUl'>
                 {pokemon.map(_pokemon =>{
                     return(
