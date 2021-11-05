@@ -18,6 +18,7 @@ class MyBag extends Component{
         const myBagArr = bags.filter(bag => bag.trainerId === auth.id)
         const _bagItem = myBagArr.find(_bag => _bag.pokemonId === pokemonNumber)
         removeFromBag(_bagItem.id);
+        history.push(`/trainer/myBag`)
     }
     startBattle(){
         const {bags, addToBag, pokemon, auth, match: {params: {id} }, history} = this.props;
@@ -29,19 +30,32 @@ class MyBag extends Component{
                 addToBag(-1000, Math.round(Math.random()*pokemon.length))
             }
         }
-        if(myBagArr.length === 3){
-            history.push('/Battle');
-        }
+        
+        history.push('/Battle');
+        
     }
     render(){
         const {bags, pokemon, auth, match: {params: {id} }, history} = this.props;
         const myBagArr = bags.filter(bag => bag.trainerId === auth.id)
         const myPokemon = [];
+        
         myBagArr.map(_bagItem => {
             return (
                 myPokemon.push(pokemon.find(_pokemon => _pokemon.id === _bagItem.pokemonId))
             )
         })
+        if(pokemon.length === 0){
+            return(<div>No Pokemon Here :(</div>)
+        }
+        if(bags.length === 0){
+            return(<div>No Pokemon Here :(</div>)
+        }
+
+        if(auth.id === undefined){
+            return(<div>Whoops... auth didnt load</div>)
+        }
+
+
         if(myPokemon.length === 0){
             return(
                 <div>

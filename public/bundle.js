@@ -2728,7 +2728,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
-/* harmony import */ var _store_pokemonReducers__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../store/pokemonReducers */ "./client/store/pokemonReducers.js");
+/* harmony import */ var _store_bagReducers__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../store/bagReducers */ "./client/store/bagReducers.js");
 
 
 
@@ -2738,27 +2738,151 @@ class Battle extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
   constructor(props) {
     super(props);
     this.state = {
-      myPokemonHp: 0,
-      oppPokemonHp: 0
+      _pokemon: '',
+      _oppPokemon: {},
+      _pokemonHealth: 0,
+      _oppPokemonHealth: 0
     };
     this.removePokemon = this.removePokemon.bind(this);
     this.attack = this.attack.bind(this);
   }
 
+  componentDidUpdate(prevProps, prevState) {
+    // console.log('prevState._pokemonHealth === 0', prevState.myPokemonHp === 0)
+    // console.log('this.props.pokemon.length !== 0', this.props.pokemon.length !== 0)
+    // console.log('this.props.bags.length !== 0', this.props.bags.length !== 0)
+    // console.log('this.props.auth !== undefined', this.props.auth !== undefined)
+    // console.log(this.props.auth.id)
+    if ((prevState._pokemonHealth <= 0 || prevState._oppPokemonHealth <= 0) && this.props.pokemon.length !== 0 && this.props.bags.length !== 0 && this.props.auth.id !== undefined) {
+      const {
+        pokemon,
+        bags,
+        auth,
+        match: {
+          params: {
+            id
+          }
+        },
+        history
+      } = this.props;
+      const myBagArr = bags.filter(_bagItem => _bagItem.trainerId === auth.id);
+      const myPokemon = [];
+      myBagArr.map(_bagItem => {
+        return myPokemon.push(pokemon.find(_pokemon => _pokemon.id === _bagItem.pokemonId));
+      });
+      const opponentBagArr = bags.filter(_bagItem => _bagItem.trainerId === -1000);
+      const oppPokemon = [];
+      opponentBagArr.map(_bagItem => {
+        return oppPokemon.push(pokemon.find(_pokemon => _pokemon.id === _bagItem.pokemonId));
+      });
+      const _pokemon = myPokemon[0];
+      console.log('myPokemon[0]', myPokemon[0]);
+
+      let _pokemonHealth = _pokemon ? _pokemon.hp : 0;
+
+      const _oppPokemon = oppPokemon[0];
+      console.log('oppPokemon[0]', oppPokemon[0]);
+
+      let _oppPokemonHealth = _oppPokemon ? _oppPokemon.hp : 0; // console.log('prevProps' , prevProps)
+      // console.log('prevState', prevState)
+      // console.log('this.props', this.props)
+
+
+      this.setState({
+        _pokemon: _pokemon,
+        _oppPokemon: _oppPokemon,
+        _pokemonHealth: _pokemonHealth,
+        _oppPokemonHealth: _oppPokemonHealth
+      });
+      console.log('this.state', this.state);
+    }
+
+    if ((prevState._pokemonHealth <= 0 || prevState._oppPokemonHealth <= 0) && this.props.pokemon.length !== 0 && this.props.bags.length !== 0 && this.props.auth.id !== undefined) {
+      const {
+        pokemon,
+        bags,
+        auth,
+        match: {
+          params: {
+            id
+          }
+        },
+        history
+      } = this.props;
+      const myBagArr = bags.filter(_bagItem => _bagItem.trainerId === auth.id);
+      const myPokemon = [];
+      myBagArr.map(_bagItem => {
+        return myPokemon.push(pokemon.find(_pokemon => _pokemon.id === _bagItem.pokemonId));
+      });
+      const opponentBagArr = bags.filter(_bagItem => _bagItem.trainerId === -1000);
+      const oppPokemon = [];
+      opponentBagArr.map(_bagItem => {
+        return oppPokemon.push(pokemon.find(_pokemon => _pokemon.id === _bagItem.pokemonId));
+      });
+      const _pokemon = myPokemon[0];
+      console.log('myPokemon[0]', myPokemon[0]);
+
+      let _pokemonHealth = _pokemon ? _pokemon.hp : 0;
+
+      const _oppPokemon = oppPokemon[0];
+      console.log('oppPokemon[0]', oppPokemon[0]);
+
+      let _oppPokemonHealth = _oppPokemon ? _oppPokemon.hp : 0; // console.log('prevProps' , prevProps)
+      // console.log('prevState', prevState)
+      // console.log('this.props', this.props)
+
+
+      this.setState({
+        _pokemon: _pokemon,
+        _oppPokemon: _oppPokemon,
+        _pokemonHealth: _pokemonHealth,
+        _oppPokemonHealth: _oppPokemonHealth
+      });
+      console.log('this.state', this.state);
+    }
+  }
+
   removePokemon(pokemonNumber) {
     const {
-      pokemon,
-      updatePokemon
+      pokemon
     } = this.props;
   }
 
-  attack(_pokemonHealth, _pokemonAttack, _oppPokemonHealth, _oppPokemonAttack) {
+  attack(_pokemonAttack, _pokemonDefense, _oppPokemonAttack, _oppPokemonDefense) {
+    const {
+      pokemon,
+      removeFromBag,
+      bags,
+      auth,
+      history
+    } = this.props;
+    const {
+      _pokemonHealth,
+      _oppPokemonHealth
+    } = this.state;
     console.log(_pokemonHealth, _oppPokemonHealth);
     this.setState({
-      myPokemonHp: _pokemonHealth - Math.round(_oppPokemonAttack * Math.random() * .5),
-      oppPokemonHp: _oppPokemonHealth - Math.round(_pokemonAttack * Math.random() * .5)
+      _pokemonHealth: _pokemonHealth - Math.round(_oppPokemonAttack * Math.random() * .5),
+      _oppPokemonHealth: _oppPokemonHealth - Math.round(_pokemonAttack * Math.random() * .5) // _pokemonHealth: (_pokemonHealth - (_pokemonAttack - _oppPokemonAttack) ),
+      // _oppPokemonHealth: (_oppPokemonHealth - (_oppPokemonDefense - _pokemonAttack) )
+
     });
     console.log('state', this.state);
+
+    if (this.state._pokemonHealth <= 0) {
+      const myBagArr = bags.filter(_bagItem => _bagItem.trainerId === auth.id);
+      const _toRemove = myBagArr.find(_bagItem => _bagItem.pokemonId === this.state._pokemon.id).id;
+      console.log(_toRemove);
+      removeFromBag(_toRemove);
+    }
+
+    if (this.state._oppPokemonHealth <= 0) {
+      console.log('here');
+      const opponentBagArr = bags.filter(_bagItem => _bagItem.trainerId === -1000);
+      const _toRemove = opponentBagArr.find(_bagItem => _bagItem.pokemonId === this.state._oppPokemon.id).id;
+      console.log(_toRemove);
+      removeFromBag(_toRemove);
+    }
   }
 
   render() {
@@ -2774,15 +2898,19 @@ class Battle extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
       history
     } = this.props;
     const myBagArr = bags.filter(_bagItem => _bagItem.trainerId === auth.id);
-    const myPokemon = [];
-    myBagArr.map(_bagItem => {
-      return myPokemon.push(pokemon.find(_pokemon => _pokemon.id === _bagItem.pokemonId));
-    });
-    const opponentBagArr = bags.filter(_bagItem => _bagItem.trainerId === -1000);
-    const oppPokemon = [];
-    opponentBagArr.map(_bagItem => {
-      return oppPokemon.push(pokemon.find(_pokemon => _pokemon.id === _bagItem.pokemonId));
-    });
+    console.log(this.state); // const myPokemon = [];
+    // myBagArr.map(_bagItem => {
+    //     return (
+    //         myPokemon.push(pokemon.find(_pokemon => _pokemon.id === _bagItem.pokemonId))
+    //     )
+    // })
+
+    const opponentBagArr = bags.filter(_bagItem => _bagItem.trainerId === -1000); // const oppPokemon = [];
+    // opponentBagArr.map(_bagItem => {
+    //     return (
+    //         oppPokemon.push(pokemon.find(_pokemon => _pokemon.id === _bagItem.pokemonId))
+    //     )
+    // })
 
     if (pokemon.length === 0) {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, "No Pokemon found here :(");
@@ -2799,16 +2927,18 @@ class Battle extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
         to: "/Pokemon"
       }, "Back to All Pokemon"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, "You won!"));
     } else {
-      const _pokemon = myPokemon[0];
+      // const _pokemon = myPokemon[0];
+      // let _pokemonHealth = _pokemon ? _pokemon.hp : 0
+      // const _oppPokemon = oppPokemon[0];
+      // let _oppPokemonHealth = _oppPokemon ? _oppPokemon.hp : 0
+      const {
+        _pokemon,
+        _oppPokemon,
+        _pokemonHealth,
+        _oppPokemonHealth
+      } = this.state;
 
-      let _pokemonHealth = _pokemon ? _pokemon.hp : 0;
-
-      const _oppPokemon = oppPokemon[0];
-
-      let _oppPokemonHealth = _oppPokemon ? _oppPokemon.hp : 0; // const {_pokemon, _oppPokemon, _pokemonHealth, _oppPokemonHealth} = this.state;
-
-
-      if (_pokemon === undefined) {
+      if (_pokemon === '') {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, "No Pokemon found here");
       }
 
@@ -2821,7 +2951,7 @@ class Battle extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, _pokemon.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, "No. ", _pokemon.number), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "stats"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, "HP: ", _pokemonHealth), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, "Attack: ", _pokemon.attack), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, "Defense: ", _pokemon.defense), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, "Speed: ", _pokemon.speed)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
-        onClick: () => this.attack(_pokemonHealth, _pokemon.attack, _oppPokemonHealth, _oppPokemon.attack)
+        onClick: () => this.attack(_pokemon.attack, _pokemon.defense, _oppPokemon.attack, _oppPokemon.defense)
       }, "Attack!")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "battleOpponentPokemon"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("img", {
@@ -2838,8 +2968,8 @@ const mapDispatchToProps = (dispatch, {
   history
 }) => {
   return {
-    updatePokemon: (pokemonId, bagId) => {
-      dispatch((0,_store_pokemonReducers__WEBPACK_IMPORTED_MODULE_2__.updatePokemon)(pokemonId, bagId, history));
+    removeFromBag: bagId => {
+      dispatch((0,_store_bagReducers__WEBPACK_IMPORTED_MODULE_2__.removeFromBag)(bagId, history));
     }
   };
 };
@@ -2941,6 +3071,7 @@ class MyBag extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
     const _bagItem = myBagArr.find(_bag => _bag.pokemonId === pokemonNumber);
 
     removeFromBag(_bagItem.id);
+    history.push(`/trainer/myBag`);
   }
 
   startBattle() {
@@ -2966,9 +3097,7 @@ class MyBag extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
       }
     }
 
-    if (myBagArr.length === 3) {
-      history.push('/Battle');
-    }
+    history.push('/Battle');
   }
 
   render() {
@@ -2988,6 +3117,18 @@ class MyBag extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
     myBagArr.map(_bagItem => {
       return myPokemon.push(pokemon.find(_pokemon => _pokemon.id === _bagItem.pokemonId));
     });
+
+    if (pokemon.length === 0) {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, "No Pokemon Here :(");
+    }
+
+    if (bags.length === 0) {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, "No Pokemon Here :(");
+    }
+
+    if (auth.id === undefined) {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, "Whoops... auth didnt load");
+    }
 
     if (myPokemon.length === 0) {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Link, {
@@ -3109,7 +3250,9 @@ const Navbar = ({
 }, "Home"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
   href: "#",
   onClick: handleClick
-}, "Logout")) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Link, {
+}, "Logout"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Link, {
+  to: "/trainer/myBag"
+}, "View My Bag")) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Link, {
   to: "/login"
 }, "Login"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Link, {
   to: "/signup"
@@ -3175,7 +3318,9 @@ class Pokemon extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
     const {
       pokemon
     } = this.props;
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.Link, {
+      to: "/trainer/myBag"
+    }, "View My Bag"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", {
       className: "pokemonUl"
     }, pokemon.map(_pokemon => {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
@@ -3481,8 +3626,7 @@ const _addToBag = bag => {
 const removeFromBag = (bagId, history) => {
   return async dispatch => {
     axios__WEBPACK_IMPORTED_MODULE_0___default()["delete"](`/api/bags/${bagId}`);
-    dispatch(_removeFromBag(bagId));
-    history.push(`/trainer/myBag`);
+    dispatch(_removeFromBag(bagId)); // history.push(`/trainer/myBag`)
   };
 };
 

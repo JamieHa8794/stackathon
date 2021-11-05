@@ -51,7 +51,7 @@ const removeFromBag = (bagId, history) =>{
     return async (dispatch) =>{
         axios.delete(`/api/bags/${bagId}`)
         dispatch(_removeFromBag(bagId))
-        history.push(`/trainer/myBag`)
+        // history.push(`/trainer/myBag`)
     }
 }
 
