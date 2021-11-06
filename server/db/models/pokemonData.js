@@ -319,7 +319,7 @@ const pokemonData = [
     "evochain_6": "",
     "description": "Its hind feet are webbed. They act as flippers, so it can swim in rivers and hunt for prey."
   },
-  /*
+  
   {
     "number": 21,
     "name": "Spearow",
@@ -4016,7 +4016,7 @@ const pokemonData = [
     "evochain_6": "",
     "description": "This Pokémon came from the future by crossing over time. It is thought that so long as Celebi appears, a bright and shining future awaits us."
   }
-  */
+  
  ]
 
   

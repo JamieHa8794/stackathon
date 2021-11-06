@@ -59,7 +59,7 @@ class MyBag extends Component{
         
         if(myPokemon.length === 0){
             return(
-                <div>
+                <div className='bagNoPokemon'>
                     <Link to='/Pokemon'>Back to All Pokemon</Link>
                     <div>
                     Theres no pokemon in your bag! Choose one to get started!
@@ -76,7 +76,7 @@ class MyBag extends Component{
             console.log(myPokemon.length)
             const {onClick} = this
             return(
-                <div>
+                <div className='myBag'>
                     <div>
                         You can only have 3 pokemon in your bag! Remove some to get started!
                     </div>
@@ -104,29 +104,31 @@ class MyBag extends Component{
         if(myPokemon.length < 3){
             return(
             <div>
-                <Link to='/Pokemon'>Back to All Pokemon</Link>
-                <div>
-                    You must have 3 pokemon to start the battle!
-                </div>
-                <ul className='myBagPokemonUl'>
-                    {myPokemon.map(_pokemon =>{
-                        return(
-                            <li className='myBagPokemonLi' key={_pokemon.id}>
-                                <Link to={`/pokemon/${_pokemon.number}`}>
-                                <img src={`../images/${_pokemon.name}.png`}/>
-                                <div>
-                                    {_pokemon.name}
-                                </div>
-                                <div>
-                                    No. {_pokemon.number}
-                                </div>
-                                </Link>
-                                <button onClick={() => this.removePokemon(_pokemon.number)}>Remove Pokemon</button>
-                            </li>
-                        )
-                    })}
-                </ul>
-            </div>  
+            <Link to='/Pokemon'>Back to All Pokemon</Link>
+                <div className='myBag'>
+                    <div>
+                        You must have 3 pokemon to start the battle!
+                    </div>
+                    <ul className='myBagPokemonUl'>
+                        {myPokemon.map(_pokemon =>{
+                            return(
+                                <li className='myBagPokemonLi' key={_pokemon.id}>
+                                    <Link to={`/pokemon/${_pokemon.number}`}>
+                                    <img src={`../images/${_pokemon.name}.png`}/>
+                                    <div>
+                                        {_pokemon.name}
+                                    </div>
+                                    <div>
+                                        No. {_pokemon.number}
+                                    </div>
+                                    </Link>
+                                    <button onClick={() => this.removePokemon(_pokemon.number)}>Remove Pokemon</button>
+                                </li>
+                            )
+                        })}
+                    </ul>
+                </div>  
+            </div>
             )
         }
         else{
@@ -134,6 +136,7 @@ class MyBag extends Component{
             return(
             <div>
                 <Link to='/Pokemon'>Back to All Pokemon</Link>
+                <div className='myBag'>
                 <ul className='myBagPokemonUl'>
                     {myPokemon.map(_pokemon =>{
                         return(
@@ -153,6 +156,7 @@ class MyBag extends Component{
                     })}
                 </ul>
                 <button onClick={startBattle}>Lets Start Battling!</button>
+                </div>
             </div>
             )
         }

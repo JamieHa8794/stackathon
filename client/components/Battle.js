@@ -228,14 +228,14 @@ class Battle extends Component{
                 Whoops.. your auth id didnt load..
             </div>)
         }
-        if(this.state._myCount === 2){
+        if(this.state._myCount === 3){
             const {updateTrainerInfo, trainer, history} = this.props
             const _trainer = trainers.find(_trainer => _trainer.id === auth.id)
             updateTrainerInfo(_trainer.id, _trainer.firstName, _trainer.lastName, _trainer.imgUrl, _trainer.wins, _trainer.losses + 1)
             history.push('/YouLost')
 
         }
-        if(this.state._oppCount === 2){
+        if(this.state._oppCount === 3){
             const {updateTrainerInfo, trainers} = this.props
             const _trainer = trainers.find(_trainer => _trainer.id === auth.id)
             updateTrainerInfo(_trainer.id, _trainer.firstName, _trainer.lastName, _trainer.imgUrl, _trainer.wins + 1, _trainer.losses)
@@ -290,11 +290,11 @@ class Battle extends Component{
                         <div>
                             No. {_pokemon.number}
                         </div>  
-                        <div className='stats'> 
+                        <div className='battleStats'> 
                             <div>
-                                HP: {_pokemonHealth}
+                                Health Points: {_pokemonHealth}
                             </div>
-                            <div>
+                            {/* <div>
                                 Attack: {_pokemon.attack}
                             </div>
                             <div>
@@ -302,10 +302,11 @@ class Battle extends Component{
                             </div>
                             <div>
                                 Speed: {_pokemon.speed}
-                            </div>
+                            </div> */}
                         </div> 
                         <button onClick={()=>this.attack(_pokemon.attack, _pokemon.defense, _oppPokemon.attack, _oppPokemon.defense)}>Attack!</button>  
                     </div>
+                    <div className='battleVs'>... VS ...</div>
                     <div className='battleOpponentPokemon'>
                         <img src={`../images/${_oppPokemon.name}.png`}/>
                         <div>
@@ -314,11 +315,11 @@ class Battle extends Component{
                         <div>
                             No. {_oppPokemon.number}
                         </div>  
-                        <div className='stats'> 
+                        <div className='battleStats'> 
                             <div>
-                                HP: {_oppPokemonHealth}
+                            Health Points: {_oppPokemonHealth}
                             </div>
-                            <div>
+                            {/* <div>
                                 Attack: {_oppPokemon.attack}
                             </div>
                             <div>
@@ -326,7 +327,7 @@ class Battle extends Component{
                             </div>
                             <div>
                                 Speed: {_oppPokemon.speed}
-                            </div>
+                            </div> */}
                         </div>   
                     </div>
                 </div>

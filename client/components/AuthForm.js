@@ -67,7 +67,7 @@ const mapDispatch = (dispatch, {history}) => {
         history.push('/trainer/addTrainerInfo');
       }
       else{
-        history.push('/home');
+        history.push('/MyProfile');
       }
     }
   }

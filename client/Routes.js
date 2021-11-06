@@ -36,6 +36,7 @@ class Routes extends Component {
     return (
       <div>
         <Route exact path='/pokemon' component={Pokemon}/>
+        <Route exact path='/pokemon/FilterSort/:by?' component={Pokemon}/>
         <Route exact path='/pokemon/:id' component={SinglePokemon}/>
         <Route exact path='/trainer/addTrainerInfo' component={AddTrainerInfo}/>
         <Route exact path='/trainer/myBag' component={MyBag}/>

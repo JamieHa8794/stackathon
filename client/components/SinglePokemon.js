@@ -42,17 +42,17 @@ class SinglePokemon extends Component{
                 <div className='singlePokemon'>
                     <img src={`../images/${_pokemon.name}.png`}/>
                     <div className='pokemonDetails'>
-                        <div>
+                        <div className='singlePName'>
                             {_pokemon.name}
                         </div>
                         <button onClick={onClick}>Pick Pokemon</button>
-                        <div>
+                        <div className='singlePNum'>
                             No. {_pokemon.number}
                         </div>
-                        <div>
+                        <div className='singlePType'>
                             Type: {_type}
                         </div>
-                        <div>
+                        <div className='aboutMe'>
                             About Me: {_pokemon.description}
                         </div>
                         <div className='stats'> 

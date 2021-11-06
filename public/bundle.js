@@ -2411,6 +2411,10 @@ class Routes extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
       component: _components_Pokemon__WEBPACK_IMPORTED_MODULE_5__["default"]
     }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_18__.Route, {
       exact: true,
+      path: "/pokemon/FilterSort/:by?",
+      component: _components_Pokemon__WEBPACK_IMPORTED_MODULE_5__["default"]
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_18__.Route, {
+      exact: true,
       path: "/pokemon/:id",
       component: _components_SinglePokemon__WEBPACK_IMPORTED_MODULE_6__["default"]
     }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_18__.Route, {
@@ -2737,7 +2741,7 @@ const mapDispatch = (dispatch, {
       if (evt.target.name === 'signup') {
         history.push('/trainer/addTrainerInfo');
       } else {
-        history.push('/home');
+        history.push('/MyProfile');
       }
     }
 
@@ -3020,7 +3024,7 @@ class Battle extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, "Whoops.. your auth id didnt load..");
     }
 
-    if (this.state._myCount === 2) {
+    if (this.state._myCount === 3) {
       const {
         updateTrainerInfo,
         trainer,
@@ -3033,7 +3037,7 @@ class Battle extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
       history.push('/YouLost');
     }
 
-    if (this.state._oppCount === 2) {
+    if (this.state._oppCount === 3) {
       const {
         updateTrainerInfo,
         trainers
@@ -3082,16 +3086,18 @@ class Battle extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("img", {
         src: `../images/${_pokemon.name}.png`
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, _pokemon.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, "No. ", _pokemon.number), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-        className: "stats"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, "HP: ", _pokemonHealth), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, "Attack: ", _pokemon.attack), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, "Defense: ", _pokemon.defense), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, "Speed: ", _pokemon.speed)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+        className: "battleStats"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, "Health Points: ", _pokemonHealth)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
         onClick: () => this.attack(_pokemon.attack, _pokemon.defense, _oppPokemon.attack, _oppPokemon.defense)
       }, "Attack!")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "battleVs"
+      }, "... VS ..."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "battleOpponentPokemon"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("img", {
         src: `../images/${_oppPokemon.name}.png`
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, _oppPokemon.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, "No. ", _oppPokemon.number), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-        className: "stats"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, "HP: ", _oppPokemonHealth), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, "Attack: ", _oppPokemon.attack), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, "Defense: ", _oppPokemon.defense), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, "Speed: ", _oppPokemon.speed))));
+        className: "battleStats"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, "Health Points: ", _oppPokemonHealth))));
     }
   }
 
@@ -3213,7 +3219,7 @@ class HowToPlay extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
       className: "howTitle"
     }, "How To Play:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
       className: "howDes"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, "To get started, sign up and fill out your profile."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, "Check out all of the pokemon."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, "Pick 3 pokemon and battle an opponent!")));
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, "To get started, sign up and fill out your profile - or log back in!"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, "Check out all of the pokemon."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, "Pick 3 pokemon and battle an opponent!")));
   }
 
 }
@@ -3336,7 +3342,9 @@ class MyBag extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
     }
 
     if (myPokemon.length === 0) {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Link, {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "bagNoPokemon"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Link, {
         to: "/Pokemon"
       }, "Back to All Pokemon"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, "Theres no pokemon in your bag! Choose one to get started!"));
     }
@@ -3350,7 +3358,9 @@ class MyBag extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
       const {
         onClick
       } = this;
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, "You can only have 3 pokemon in your bag! Remove some to get started!"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "myBag"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, "You can only have 3 pokemon in your bag! Remove some to get started!"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", {
         className: "myBagPokemonUl"
       }, myPokemon.map((_pokemon, idx) => {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
@@ -3369,7 +3379,9 @@ class MyBag extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
     if (myPokemon.length < 3) {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Link, {
         to: "/Pokemon"
-      }, "Back to All Pokemon"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, "You must have 3 pokemon to start the battle!"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", {
+      }, "Back to All Pokemon"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "myBag"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, "You must have 3 pokemon to start the battle!"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", {
         className: "myBagPokemonUl"
       }, myPokemon.map(_pokemon => {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
@@ -3382,14 +3394,16 @@ class MyBag extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
         }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, _pokemon.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, "No. ", _pokemon.number)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
           onClick: () => this.removePokemon(_pokemon.number)
         }, "Remove Pokemon"));
-      })));
+      }))));
     } else {
       const {
         startBattle
       } = this;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Link, {
         to: "/Pokemon"
-      }, "Back to All Pokemon"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", {
+      }, "Back to All Pokemon"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "myBag"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", {
         className: "myBagPokemonUl"
       }, myPokemon.map(_pokemon => {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
@@ -3404,7 +3418,7 @@ class MyBag extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
         }, "Remove Pokemon"));
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
         onClick: startBattle
-      }, "Lets Start Battling!"));
+      }, "Lets Start Battling!")));
     }
   }
 
@@ -3469,7 +3483,13 @@ class MyProfile extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
     }
 
     const winRate = _trainer.wins === 0 ? 0 : _trainer.wins / (_trainer.wins + _trainer.losses);
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, "First Name: ", _trainer.firstName), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, "Last Name: ", _trainer.lastName), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, "Wins: ", _trainer.wins), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, "Losses: ", _trainer.losses), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, "Win Rate: ", winRate));
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+      className: "profile"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("img", {
+      src: _trainer.imgUrl
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+      className: "profileDetails"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, "First Name: ", _trainer.firstName), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, "Last Name: ", _trainer.lastName), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, "Wins: ", _trainer.wins), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, "Losses: ", _trainer.losses), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, "Win Rate: ", winRate)));
   }
 
 }
@@ -3587,13 +3607,66 @@ class Pokemon extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
     const {
       history
     } = this.props;
+    history.push(`/Pokemon/FilterSort/${event.target.value}`);
   }
 
   render() {
     const {
+      types,
+      match
+    } = this.props;
+    const {
+      pokemonType
+    } = this.state;
+    let {
       pokemon
     } = this.props;
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", {
+    const matchBy = match.params.by;
+
+    if (matchBy != undefined && matchBy !== 'AtoZ' && matchBy !== 'ZtoA') {
+      if (types.length > 0) {
+        pokemon = pokemon.filter(_pokemon => _pokemon.typeId == (types.find(type => type.type === matchBy) ? types.find(type => type.type === matchBy).id : null));
+      }
+    }
+
+    if (matchBy === 'AtoZ') {
+      pokemon.sort((A, B) => A.name.localeCompare(B.name));
+    }
+
+    if (matchBy === 'ZtoA') {
+      pokemon.sort((A, B) => B.name.localeCompare(A.name));
+    }
+
+    let imgUrlHead = '../../images/';
+
+    if (matchBy === undefined) {
+      pokemon.sort(function (a, b) {
+        return a.number - b.number;
+      });
+      imgUrlHead = 'images/';
+    }
+
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+      className: "sortFilterPokemon"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+      className: "sort"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Link, {
+      to: "/Pokemon"
+    }, "Pokedex No."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Link, {
+      to: "/Pokemon/FilterSort/AtoZ"
+    }, "A to Z"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Link, {
+      to: "/Pokemon/FilterSort/ZtoA"
+    }, "Z to A")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("select", {
+      className: "byType",
+      value: pokemonType,
+      onChange: this.onChange
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", null, "Filter by Type"), types.map(type => {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
+        key: type.id,
+        value: type ? type.type : null,
+        onChange: this.onChange
+      }, type ? type.type : null);
+    })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", {
       className: "pokemonUl"
     }, pokemon.map(_pokemon => {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
@@ -3602,7 +3675,7 @@ class Pokemon extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Link, {
         to: `/pokemon/${_pokemon.number}`
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("img", {
-        src: `images/${_pokemon.name}.png`
+        src: `${imgUrlHead}${_pokemon.name}.png`
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, _pokemon.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, "No. ", _pokemon.number)));
     })));
   }
@@ -3701,9 +3774,17 @@ class SinglePokemon extends react__WEBPACK_IMPORTED_MODULE_1__.Component {
       src: `../images/${_pokemon.name}.png`
     }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", {
       className: "pokemonDetails"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", null, _pokemon.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("button", {
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", {
+      className: "singlePName"
+    }, _pokemon.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("button", {
       onClick: onClick
-    }, "Pick Pokemon"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", null, "No. ", _pokemon.number), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", null, "Type: ", _type), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", null, "About Me: ", _pokemon.description), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", {
+    }, "Pick Pokemon"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", {
+      className: "singlePNum"
+    }, "No. ", _pokemon.number), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", {
+      className: "singlePType"
+    }, "Type: ", _type), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", {
+      className: "aboutMe"
+    }, "About Me: ", _pokemon.description), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", {
       className: "stats"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", null, "HP: ", _pokemon.hp), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", null, "Attack: ", _pokemon.attack), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", null, "Defense: ", _pokemon.defense), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", null, "Speed: ", _pokemon.speed)))));
   }

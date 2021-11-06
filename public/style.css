@@ -19,6 +19,16 @@ nav a {
   display: inline-block;
   margin: 1em;
 }
+button{
+  /* background-color: lightgray; */
+  /* color: black; */
+  /* border: lightgray; */
+}
+
+button:hover{
+  color:mediumaquamarine
+}
+
 
 form div {
   margin: 1em;
@@ -68,8 +78,10 @@ form div {
 
 .singlePokemon {
   display:flex;
-  flex-wrap: wrap;
+  /* flex-wrap: wrap; */
   font-family: Verdana, Geneva, Tahoma, sans-serif;
+  justify-content: center;
+  align-items: center;
 }
 
 .singlePokemon img{
@@ -78,17 +90,41 @@ form div {
   height: 200px;
   width: 200px;
 }
+.pokmonDetails{}
+
+.singlePName{
+  padding: 5px;
+}
+
+.singlePNum{
+  padding: 5px;
+}
+
+.singlePType{
+  padding: 5px;
+}
+
+
+.aboutMe{
+  display:flex;
+  flex-wrap: wrap;
+  padding: 5px;
+  margin-right: 500px;
+}
 
 .stats{
   display: flex;
   flex-wrap: wrap;
   flex-direction: column;
+  padding: 5px;
 }
 
 .howDes{
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
 }
 
 .howTo{
@@ -97,6 +133,7 @@ form div {
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
+  padding-top: 100px;
 }
 
 .trainerDetails{
@@ -120,9 +157,17 @@ form div {
   padding-left: 0px;
 }
 
+.myBag{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 .myBagPokemonUl{
   display: flex;
   flex-wrap: wrap;
+  padding-left: 0px;
 }
 
 .myBagPokemonLi{
@@ -132,6 +177,7 @@ form div {
   justify-content: center;
   align-items: center;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
+  padding: 10px;
 }
 
 .myBagPokemonLi a{
@@ -147,8 +193,17 @@ form div {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  align-items: center;
 }
 
+.battleVs{
+  padding-left: 30px;
+  padding-right: 30px;
+}
+.battleStats{
+  
+
+}
 .battleMyPokemon{
   padding: 20px;
 }
@@ -170,5 +225,47 @@ form div {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding-top: 200px;
+  padding-top: 150px;
 }
+
+.profile{
+  display:flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding-top: 20px;
+}
+
+.profileDetails{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  /* align-items: center; */
+}
+
+.profile img{
+  padding-right: 25px;
+}
+
+.sortFilterPokemon{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.sort{
+  display: flex;
+  justify-content: center;
+}
+
+.sort a {
+  padding: 20px;
+}
+
+.bagNoPokemon{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-top: 150px;
+}
+

@@ -35,7 +35,7 @@ class HowToPlay extends Component{
                 </div>
                 <div className='howDes'>
                     <div>
-                    To get started, sign up and fill out your profile.
+                    To get started, sign up and fill out your profile - or log back in!
                     </div>
                     <div>
                     Check out all of the pokemon. 
